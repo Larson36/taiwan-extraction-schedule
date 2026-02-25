@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ARIS Taiwan Trip 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;700&family=DM+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1410;
+    --paper: #f5f0e8;
+    --red: #c0392b;
+    --gold: #b8860b;
+    --muted: #7a6f62;
+    --line: #d4c9b8;
+    --tag-bg: #e8e0d0;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'DM Mono', monospace;
+    min-height: 100vh;
+    padding: 0 0 80px 0;
+  }
+
+  .header {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 36px 24px 28px;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: '台灣';
+    position: absolute;
+    right: -10px;
+    top: -20px;
+    font-family: 'Noto Serif TC', serif;
+    font-size: 120px;
+    font-weight: 700;
+    color: rgba(255,255,255,0.04);
+    pointer-events: none;
+    line-height: 1;
+  }
+  .header-label {
+    font-size: 10px;
+    letter-spacing: 3px;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .header-title {
+    font-family: 'Instrument Serif', serif;
+    font-size: 32px;
+    color: var(--paper);
+    line-height: 1.1;
+    margin-bottom: 6px;
+  }
+  .header-sub {
+    font-size: 11px;
+    color: rgba(245,240,232,0.5);
+    letter-spacing: 1px;
+  }
+  .header-dates {
+    margin-top: 16px;
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .date-chip {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.12);
+    padding: 4px 10px;
+    font-size: 10px;
+    letter-spacing: 1px;
+    border-radius: 2px;
+    color: var(--paper);
+  }
+
+  .tabs {
+    display: flex;
+    background: var(--ink);
+    border-top: 1px solid rgba(255,255,255,0.08);
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .tab {
+    flex: 1;
+    min-width: 80px;
+    padding: 12px 8px;
+    text-align: center;
+    font-size: 10px;
+    letter-spacing: 1px;
+    color: rgba(245,240,232,0.4);
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+  .tab.active {
+    color: var(--gold);
+    border-bottom-color: var(--gold);
+  }
+  .tab-day {
+    display: block;
+    font-size: 14px;
+    font-family: 'Instrument Serif', serif;
+    font-weight: 400;
+    color: inherit;
+    margin-bottom: 2px;
+  }
+
+  .section { display: none; padding: 0 16px; }
+  .section.active { display: block; }
+
+  .day-header {
+    padding: 20px 0 12px;
+    border-bottom: 1px solid var(--line);
+    margin-bottom: 0;
+  }
+  .day-header-label {
+    font-size: 9px;
+    letter-spacing: 3px;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .day-header-title {
+    font-family: 'Instrument Serif', serif;
+    font-size: 22px;
+    color: var(--ink);
+  }
+  .day-header-note {
+    font-size: 10px;
+    color: var(--muted);
+    margin-top: 4px;
+    line-height: 1.5;
+  }
+
+  .stop {
+    display: flex;
+    gap: 14px;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--line);
+    align-items: flex-start;
+    animation: fadeIn 0.3s ease;
+  }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+
+  .stop-number {
+    min-width: 28px;
+    height: 28px;
+    background: var(--ink);
+    color: var(--paper);
+    font-size: 11px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 2px;
+    margin-top: 2px;
+    flex-shrink: 0;
+  }
+  .stop-number.red { background: var(--red); }
+  .stop-number.gold { background: var(--gold); }
+
+  .stop-body { flex: 1; min-width: 0; }
+
+  .stop-time {
+    font-size: 9px;
+    letter-spacing: 2px;
+    color: var(--muted);
+    margin-bottom: 3px;
+  }
+
+  .stop-name {
+    font-family: 'Instrument Serif', serif;
+    font-size: 18px;
+    line-height: 1.2;
+    color: var(--ink);
+    margin-bottom: 3px;
+  }
+  .stop-name-cn {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 13px;
+    color: var(--muted);
+    margin-bottom: 6px;
+  }
+
+  .stop-note {
+    font-size: 10px;
+    color: var(--muted);
+    line-height: 1.6;
+    margin-bottom: 8px;
+  }
+
+  .stop-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-bottom: 8px;
+  }
+  .tag {
+    background: var(--tag-bg);
+    padding: 2px 7px;
+    font-size: 9px;
+    letter-spacing: 1px;
+    border-radius: 2px;
+    color: var(--muted);
+    text-transform: uppercase;
+  }
+  .tag.warning {
+    background: #fef3cd;
+    color: #856404;
+  }
+  .tag.alert {
+    background: #fde8e8;
+    color: var(--red);
+  }
+
+  .map-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    background: var(--ink);
+    color: var(--paper);
+    padding: 7px 12px;
+    font-size: 10px;
+    letter-spacing: 1px;
+    text-decoration: none;
+    border-radius: 2px;
+    transition: background 0.2s;
+    text-transform: uppercase;
+  }
+  .map-btn:hover { background: #333; }
+  .map-btn svg { width: 10px; height: 10px; fill: currentColor; }
+
+  .section-divider {
+    margin: 8px 0 0;
+    padding: 10px 0 6px;
+    font-size: 9px;
+    letter-spacing: 3px;
+    color: var(--gold);
+    text-transform: uppercase;
+    border-top: 1px solid var(--line);
+  }
+
+  .alert-box {
+    background: #fde8e8;
+    border-left: 3px solid var(--red);
+    padding: 10px 12px;
+    margin: 12px 0;
+    font-size: 10px;
+    color: var(--red);
+    line-height: 1.6;
+    letter-spacing: 0.5px;
+  }
+  .info-box {
+    background: #f0f4ff;
+    border-left: 3px solid #4a6fa5;
+    padding: 10px 12px;
+    margin: 12px 0;
+    font-size: 10px;
+    color: #4a6fa5;
+    line-height: 1.6;
+    letter-spacing: 0.5px;
+  }
+
+  .footer-note {
+    margin-top: 24px;
+    padding: 16px;
+    background: var(--ink);
+    color: rgba(245,240,232,0.5);
+    font-size: 10px;
+    line-height: 1.8;
+    letter-spacing: 0.5px;
+    border-radius: 2px;
+  }
+  .footer-note strong { color: var(--gold); }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-label">ARIS × 維琛 ∙ Taiwan 2026</div>
+  <div class="header-title">Taiwan Trip<br>Itinerary</div>
+  <div class="header-sub">Larson · ZiYi · Irvine · Peijia</div>
+  <div class="header-dates">
+    <div class="date-chip">✈ Mar 3 — Depart KUL</div>
+    <div class="date-chip">🏥 Mar 4–6 — 花蓮 Hank</div>
+    <div class="date-chip">🏙 Mar 6–7 — Taipei</div>
+    <div class="date-chip">✈ Mar 7 — Fly Home 18:15</div>
+  </div>
+</div>
+
+<div class="tabs">
+  <div class="tab active" onclick="showTab('hualien', this)">
+    <span class="tab-day">花蓮</span>Food
+  </div>
+  <div class="tab" onclick="showTab('mar6', this)">
+    <span class="tab-day">Mar 6</span>Taipei Eve
+  </div>
+  <div class="tab" onclick="showTab('mar7', this)">
+    <span class="tab-day">Mar 7</span>Last Day
+  </div>
+  <div class="tab" onclick="showTab('notes', this)">
+    <span class="tab-day">⚠️</span>Flags
+  </div>
+</div>
+
+<!-- ===================== HUALIEN TAB ===================== -->
+<div class="section active" id="hualien">
+
+  <div class="day-header">
+    <div class="day-header-label">花蓮 · Mar 4–6</div>
+    <div class="day-header-title">Hualien Food Guide</div>
+    <div class="day-header-note">Sequenced by time slot. Check closures before going.</div>
+  </div>
+
+  <div class="alert-box">
+    ⚠️ Mar 4 (Wed) — 大汗早点, 庙口红茶, 周家蒸饺 all CLOSED on Wednesdays.<br>
+    ⚠️ Mar 5 (Thu) morning 9–12: Hank unavailable. This is your breakfast + team debrief window.
+  </div>
+
+  <div class="section-divider">🌅 Morning — Before or Between Training</div>
+
+  <div class="stop">
+    <div class="stop-number red">1</div>
+    <div class="stop-body">
+      <div class="stop-time">OPEN 06:00 — CLOSES 17:00 · CLOSED WED</div>
+      <div class="stop-name">Miao Kou Red Tea</div>
+      <div class="stop-name-cn">庙口红茶</div>
+      <div class="stop-tags">
+        <span class="tag">Drink</span>
+        <span class="tag">Morning</span>
+        <span class="tag warning">Closed Wed</span>
+      </div>
+      <div class="stop-note">Classic black tea beside the temple. Opens 6 AM — perfect first stop. Sit outside, absorb 花蓮 at dawn.</div>
+      <a class="map-btn" href="https://maps.google.com/?cid=1829315300653570641" target="_blank">
+        <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+        Open in Maps
+      </a>
+    </div>
+  </div>
+
+  <div class="stop">
+    <div class="stop-number red">2</div>
+    <div class="stop-body">
+      <div class="stop-time">OPEN 09:20 — CLOSES 21:00 · DAILY</div>
+      <div class="stop-name">Gong Zheng Buns</div>
+      <div class="stop-name-cn">公正包子</div>
+      <div class="stop-tags">
+        <span class="tag">Buns</span>
+        <span class="tag">Morning</span>
+        <span class="tag">Next Door to 庙口</span>
+      </div>
+      <div class="stop-note">Literally next door to 庙口红茶. Grab buns while waiting for your tea. Best combo in 花蓮.</div>
+      <a class="map-btn" href="https://maps.google.com/?cid=10419141611252273965" target="_blank">
+        <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+        Open in Maps
+      </a>
+    </div>
+  </div>
+
+  <div class="stop">
+    <div class="stop-number red">3</div>
+    <div class="stop-body">
+      <div class="stop-time">OPEN 06:40 — CLOSES 11:30 · CLOSED WED · BOOK AHEAD</div>
+      <div class="stop-name">Da Han Breakfast</div>
+      <div class="stop-name-cn">大汗早点</div>
+      <div class="stop-tags">
+        <span class="tag">Breakfast</span>
+        <span class="tag alert">Must Book</span>
+        <span class="tag warning">Closed Wed</span>
+        <span class="tag">Best Mar 5 Thu</span>
+      </div>
+      <div class="stop-note">Best breakfast in 花蓮. Small shop, limited seats. CALL to book: +886 911 322 494. Plan for Mar 5 (Thu) 9:00 AM — this is your team debrief morning while Hank is unavailable.</div>
+      <a class="map-btn" href="https://maps.google.com/?cid=17669172712402706510" target="_blank">
+        <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+        Open in Maps
+      </a>
+    </div>
+  </div>
+
+  <div class="stop">
+    <div class="stop-number red">4</div>
+    <div class="stop-body">
+      <div class="stop-time">OPEN 09:30 — CLOSES 13:30 · CLOSED SAT</div>
+      <div class="stop-name">Ye Xiang Wontons</div>
+      <div class="stop-name-cn">液香扁食</div>
+      <div class="stop-tags">
+        <span class="tag">Wontons</span>
+        <span class="tag alert">Morning Only</span>
+        <span class="tag warning">Closed Sat</span>
+      </div>
+      <div class="stop-note">Hualien-style wontons. ONE item on the menu. Sells out early — go before noon. 2 min walk from 公正包子.</div>
+      <a class="map-btn" href="https://maps.google.com/?cid=14766748184550707192" target="_blank">
+        <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+        Open in Maps
+      </a>
+    </div>
+  </div>
+
+  <div class="section-divider">☀️ Midday — Lunch or After Morning Session</div>
+
+  <div class="stop">
+    <div class="stop-number gold">5</div>
+    <div class="stop-body">
+      <div class="stop-time">OPEN 09:00 — CLOSES 22:00 · CLOSED WED</div>
+      <div class="stop-name">Zhou Jia Soup Dumplings</div>
+      <div class="stop-name-cn">周家蒸饺小笼包</div>
+      <div class="stop-tags">
+        <span class="tag">XLB</span>
+        <span class="tag">Lunch</span>
+        <span class="tag warning">Closed Wed</span>
+      </div>
+      <div class="stop-note">Hualien-style soup dumplings — different from Taipei XLB. Proper sit-down lunch. The soup dumplings + hot sour soup combo is the move.</div>
+      <a class="map-btn" href="https://maps.google.com/?cid=17736308362703644369" target="_blank">
+        <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+        Open in Maps
+      </a>
+    </div>
+  </div>
+
+  <div class="stop">
+    <div class="stop-number gold">6</div>
+    <div class="stop-body">
+      <div class="stop-time">OPEN 13:00 — CLOSES 18:00 · AFTERNOON ONLY</div>
+      <div class="stop-name">Fujian Street Sausage</div>
+      <div class="stop-name-cn">福建街香肠</div>
+      <div class="stop-tags">
+        <span class="tag">Street Food</span>
+        <span class="tag alert">13:00–18:00 Only</span>
+      </div>
+      <div class="stop-note">Afternoon snack walk. Pair with 曾记麻薯 nearby — one food, one souvenir, done in 20 min.</div>
+      <a class="map-btn" href="https://maps.google.com/?q=福建街香肠+花蓮" target="_blank">
+        <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+        Open in Maps
+      </a>
+    </div>
+  </div>
+
+  <div class="section-divider">🍰 Anytime — Desserts & Snacks</div>
+
+  <div class="stop">
+    <div class="stop-number">7</div>
+    <div class="stop-body">
+      <div class="stop-time">OPEN 10:30 — CLOSES 18:00 · DAILY · GO BEFORE 15:00</div>
+      <div class="stop-name">OOA General's Mansion</div>
+      <div class="stop-name-cn">OOA 將軍府 × 陳耀訓·麵包埠</div>
+      <div class="stop-tags">
+        <span class="tag">Pastry</span>
+        <span class="tag alert">Sells Out Early</span>
+        <span class="tag">Taiwan's Top Baker</span>
+      </div>
+      <div class="stop-note">Taiwan's top pastry chef's only 花蓮 outpost. Taro + salted egg yolk croissant NT$150. Limited daily stock — go before 3 PM or it's gone. Worth the detour. Team treat.</div>
+      <a class="map-btn" href="https://maps.google.com/?cid=4872440239956919276" target="_blank">
+        <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+        Open in Maps
+      </a>
+    </div>
+  </div>
+
+  <div class="stop">
+    <div class="stop-number">8</div>
+    <div class="stop-body">
+      <div class="stop-time">FLEXIBLE · NO TIME PRESSURE</div>
+      <div class="stop-name">Zhongyi Douhua / Cai Ji Douhua</div>
+      <div class="stop-name-cn">中一豆花 / 蔡记豆花</div>
+      <div class="stop-tags">
+        <span class="tag">Dessert</span>
+        <span class="tag">Flexible</span>
+      </div>
+      <div class="stop-note">Either works. Hit whichever is closer to where you are. Tofu dessert — light, refreshing, perfect after heavy meals.</div>
+      <a class="map-btn" href="https://maps.google.com/?q=中一豆花+花蓮" target="_blank">
+        <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+        Open in Maps
+      </a>
+    </div>
+  </div>
+
+  <div class="stop">
+    <div class="stop-number">9</div>
+    <div class="stop-body">
+      <div class="stop-time">FLEXIBLE · SOUVENIR + SNACK</div>
+      <div class="stop-name">Zeng Ji Mochi + Hong Yu Cake</div>
+      <div class="stop-name-cn">曾记麻薯 + 弘宇蛋糕专卖店</div>
+      <div class="stop-tags">
+        <span class="tag">Souvenir</span>
+        <span class="tag">Mochi</span>
+        <span class="tag">Cake</span>
+      </div>
+      <div class="stop-note">Pair these two together — mochi to eat, cake to bring back. Classic 花蓮 souvenirs. Near 福建街香肠.</div>
+      <a class="map-btn" href="https://maps.google.com/?q=曾记麻薯+花蓮" target="_blank">
+        <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+        Open in Maps
+      </a>
+    </div>
+  </div>
+
+</div>
+
+<!-- ===================== MAR 6 TAB ===================== -->
+<div class="section" id="mar6">
+  <div class="day-header">
+    <div class="day-header-label">Taipei · Friday Mar 6</div>
+    <div class="day-header-title">Arrival Evening</div>
+    <div class="day-header-note">Arrive Taipei ~19:30–20:00 after train from 花蓮. Hotel: CHECK inn Taipei Main Station. Everything tonight is walking distance.</div>
+  </div>
+
+  <div class="info-box">
+    ℹ️ 大稻埕魯肉飯 closes at 20:00. If your train arrives late, skip to Stop 3 (宁夏) directly — no timing risk there.
+  </div>
+
+  <div class="stop">
+    <div class="stop-number red">1</div>
+    <div class="stop-body">
+      <div class="stop-time">STOP 1 · ARRIVE BY 19:30 · CLOSES 20:00</div>
+      <div class="stop-name">Dadaocheng Lu Rou Fan</div>
+      <div class="stop-name-cn">大稻埕魯肉飯</div>
+      <div class="stop-tags">
+        <span class="tag">Dinner</span>
+        <span class="tag alert">Closes 20:00</span>
+        <span class="tag">10 min walk from hotel</span>
+      </div>
+      <div class="stop-note">Fatty braised pork rice. Best in Taipei. Time-sensitive — don't miss it. 10 min walk from your hotel.</div>
+      <a class="map-btn" href="https://maps.google.com/?cid=2433287069217116553" target="_blank">
+        <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+        Open in Maps
+      </a>
+    </div>
+  </div>
+
+  <div class="stop">
+    <div class="stop-number red">2</div>
+    <div class="stop-body">
+      <div class="stop-time">STOP 2 · ~20:15 · EVENING STROLL</div>
+      <div class="stop-name">Dihua Old Street</div>
+      <div class="stop-name-cn">迪化街</div>
+      <div class="stop-tags">
+        <span class="tag">Atmosphere</span>
+        <span class="tag">Old Taipei</span>
+        <span class="tag">30 min walk</span>
+      </div>
+      <div class="stop-note">Walk from 大稻埕 toward 宁夏 through 迪化街. Historic Taipei at night — lanterns, old shophouses. Wind-down walk, not a destination.</div>
+      <a class="map-btn" href="https://maps.google.com/?cid=8859018979726397909" target="_blank">
+        <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+        Open in Maps
+      </a>
+    </div>
+  </div>
+
+  <div class="stop">
+    <div class="stop-number red">3</div>
+    <div class="stop-body">
+      <div class="stop-time">STOP 3 · ~20:45 · OPEN UNTIL 23:30</div>
+      <div class="stop-name">Ningxia Night Market</div>
+      <div class="stop-name-cn">宁夏夜市</div>
+      <div class="stop-tags">
+        <span class="tag">Night Market</span>
+        <span class="tag">Locals Only</span>
+        <span class="tag">2 hrs</span>
+      </div>
+      <div class="stop-note">Main event of the evening. Take your time — closes 23:30.</div>
+      <a class="map-btn" href="https://maps.google.com/?cid=11738230280794280116" target="_blank">
+        <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+        Open in Maps
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== MAR 7 TAB ===================== -->
+<div class="section" id="mar7">
+
+  <div class="day-header">
+    <div class="day-header-label">Taipei · Saturday Mar 7</div>
+    <div class="day-header-title">Last Day</div>
+    <div class="day-header-note">Hard stop: leave hotel 15:30. Airport Express from Taipei Main Station (walk out of hotel) → 40 min to TPE. Flight 18:15.</div>
+  </div>
+
+  <div class="alert-box">
+    🛫 HARD DEADLINE: Leave hotel by 15:30. Do NOT be late for this.
+  </div>
+
+  <div class="stop">
+    <div class="stop-number red">1</div>
+    <div class="stop-body">
+      <div class="stop-time">STOP 1 · 08:00 · OPENS 05:00 · CLOSES 12:00</div>
+      <div class="stop-name">Mai Er Mei Breakfast</div>
+      <div class="stop-name-cn">麥而美</div>
+      <div class="stop-tags">
+        <span class="tag">Breakfast</span>
+        <span class="tag">Locals Only</span>
+        <span class="tag">Near Ximending</span>
+      </div>
+      <div class="stop-note">Fast in and out. Don’t drag this — protect the day.</div>
+      <a class="map-btn" href="https://maps.google.com/?cid=4016966826566568746" target="_blank">
+        <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+        Open in Maps
+      </a>
+    </div>
+  </div>
+
+  <div class="stop">
+    <div class="stop-number red">2</div>
+    <div class="stop-body">
+      <div class="stop-time">STOP 2 · 11:00–13:15 · OPENS 11:00 SAT</div>
+      <div class="stop-name">Ximending District</div>
+      <div class="stop-name-cn">西門町</div>
+      <div class="stop-tags">
+        <span class="tag">Shopping</span>
+        <span class="tag">Street Food</span>
+        <span class="tag">Souvenirs</span>
+        <span class="tag">Short Window</span>
+      </div>
+      <div class="stop-note">No 3.5-hour chill. Keep this tight. We must fit Tianhou Gong prayer + still leave hotel by 15:30.</div>
+      <a class="map-btn" href="https://maps.google.com/?cid=10784439233747801280" target="_blank">
+        <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+        Open in Maps
+      </a>
+    </div>
+  </div>
+
+  <div class="stop">
+    <div class="stop-number gold">3</div>
+    <div class="stop-body">
+      <div class="stop-time">STOP 3 · 13:30–14:15 · MIN 45 MIN</div>
+      <div class="stop-name">Tianhou Gong (Prayer)</div>
+      <div class="stop-name-cn">天后宮</div>
+      <div class="stop-tags">
+        <span class="tag alert">Non-negotiable</span>
+        <span class="tag">Prayer</span>
+        <span class="tag">45 min</span>
+      </div>
+      <div class="stop-note">Minimum 45 minutes here for prayer. After that, team can roam nearby if time allows — regroup on time so we still leave by 15:30.</div>
+      <a class="map-btn" href="https://maps.google.com/?q=天后宮+西門町" target="_blank">
+        <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+        Open in Maps
+      </a>
+    </div>
+  </div>
+
+  <div class="stop">
+    <div class="stop-number">4</div>
+    <div class="stop-body">
+      <div class="stop-time">DEPART 15:30 · AIRPORT EXPRESS · 40 MIN TO TPE</div>
+      <div class="stop-name">Taipei Main Station → TPE</div>
+      <div class="stop-name-cn">台北車站 → 桃園機場</div>
+      <div class="stop-tags">
+        <span class="tag alert">Leave 15:30</span>
+        <span class="tag">Airport Express</span>
+        <span class="tag">Walk from Hotel</span>
+      </div>
+      <div class="stop-note">At airport by ~16:10. Flight boards ~17:45. Do not gamble this.</div>
+      <a class="map-btn" href="https://maps.google.com/?q=Taipei+Main+Station+Airport+MRT" target="_blank">
+        <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+        Open in Maps
+      </a>
+    </div>
+  </div>
+
+</div>
+
+<!-- ===================== FLAGS TAB ===================== -->
+<div class="section" id="notes">
+  <div class="day-header">
+    <div class="day-header-label">Critical Flags</div>
+    <div class="day-header-title">Don't Miss These</div>
+    <div class="day-header-note">Action items and time-sensitive reminders.</div>
+  </div>
+
+  <div class="alert-box">
+    🔴 BOOK NOW — 大汗早点: Call +886 911 322 494. 4 pax, Mar 5 (Thu) ~9:00 AM.
+  </div>
+
+  <div class="alert-box">
+    🔴 BUY FLEXIBLE TRAIN TICKETS — 花蓮 → Taipei on Mar 6. Do NOT fix the time.
+  </div>
+
+  <div class="alert-box">
+    🔴 HARD FLIGHT DEADLINE — Mar 7, leave hotel by 15:30.
+  </div>
+</div>
+
+<script>
+function showTab(id, el) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  el.classList.add('active');
+}
+</script>
+
+</body>
+</html>
