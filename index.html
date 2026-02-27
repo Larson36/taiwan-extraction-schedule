@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>台湾 榨干 PROTOCOL v3.0</title>
+<title>台湾学习之旅 v4.0 — Team Schedule</title>
 <style>
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body, html { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif; background-color: #0F172A; color: #E5E7EB; min-height: 100vh; }
@@ -25,16 +25,14 @@ body, html { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFa
 .tw-card { padding: 0.75rem; background: #1E293B; border-radius: 0.5rem; border: 1px solid #374151; margin-bottom: 0.5rem; }
 .tw-card:hover { border-color: #4B5563; }
 .tw-badge { display: inline-block; padding: 0.2rem 0.5rem; border-radius: 0.25rem; font-weight: bold; font-size: 0.688rem; color: #fff; margin-right: 0.375rem; vertical-align: middle; }
-.tw-badge.a { background: #3B82F6; }
-.tw-badge.b { background: #F59E0B; }
-.tw-badge.c { background: #10B981; }
-.tw-badge.team { background: #8B5CF6; }
+.tw-badge.larson { background: #8B5CF6; }
+.tw-badge.ziyi { background: #EC4899; }
+.tw-badge.irvine { background: #F59E0B; }
+.tw-badge.peijia { background: #10B981; }
+.tw-badge.all { background: #374151; }
 .tw-card-title { font-weight: bold; font-size: 0.813rem; color: #F3F4F6; margin-bottom: 0.375rem; }
 .tw-card-desc { color: #D1D5DB; font-size: 0.813rem; line-height: 1.5; }
 .tw-highlight { color: #FCD34D; background: rgba(251,191,36,0.1); padding: 0.375rem 0.5rem; border-radius: 0.25rem; border: 1px solid rgba(251,191,36,0.15); font-size: 0.75rem; margin-top: 0.375rem; display: block; line-height: 1.4; }
-.tw-team-row { padding: 0.5rem; background: rgba(30,41,59,0.5); border-radius: 0.25rem; margin-bottom: 0.375rem; font-size: 0.75rem; }
-.tw-team-name { font-weight: bold; color: #F3F4F6; }
-.tw-team-task { color: #D1D5DB; }
 .tw-day-header { padding: 0.75rem; background: #1E293B; border-radius: 0.5rem; border: 1px solid rgba(251,191,36,0.3); margin-bottom: 0.75rem; }
 .tw-day-header h2 { font-size: 1rem; font-weight: 900; color: #FBBF24; }
 .tw-day-header p { font-size: 0.75rem; color: #9CA3AF; margin-top: 0.25rem; }
@@ -42,36 +40,49 @@ body, html { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFa
 .tw-block-nav button { padding: 0.375rem 0.625rem; border-radius: 0.25rem; font-size: 0.688rem; font-weight: bold; white-space: nowrap; cursor: pointer; border: none; }
 .tw-block-nav button.active { background: #2563EB; color: #fff; }
 .tw-block-nav button.inactive { background: #1E293B; color: #6B7280; }
-.tw-layer-header { display: flex; align-items: center; justify-content: space-between; padding: 0.5rem; background: #1E293B; border-radius: 0.375rem 0.375rem 0 0; cursor: pointer; border: 1px solid #374151; border-bottom: none; }
-.tw-layer-header:hover { background: #253044; }
-.tw-layer-body { padding: 0.5rem; background: rgba(15,23,42,0.5); border: 1px solid #374151; border-top: none; border-radius: 0 0 0.375rem 0.375rem; margin-bottom: 0.5rem; }
+.tw-block-card { padding: 0.75rem; background: #1E293B; border-radius: 0.5rem; border: 1px solid #FBBF24; margin-bottom: 0.5rem; }
+.tw-block-meta { font-size: 0.75rem; color: #6B7280; font-style: italic; margin-top: 0.25rem; }
 .tw-item { padding: 0.375rem 0.5rem; border-radius: 0.25rem; font-size: 0.75rem; line-height: 1.5; margin-bottom: 0.25rem; }
+.tw-item.capture { background: rgba(59,130,246,0.08); color: #93C5FD; border: 1px solid rgba(59,130,246,0.15); }
 .tw-item.ask { background: rgba(251,191,36,0.08); color: #FCD34D; border: 1px solid rgba(251,191,36,0.15); }
 .tw-item.critical { background: rgba(239,68,68,0.08); color: #FCA5A5; border: 1px solid rgba(239,68,68,0.15); }
-.tw-item.observe { background: rgba(168,85,247,0.08); color: #C4B5FD; border: 1px solid rgba(168,85,247,0.15); }
-.tw-item.record { background: rgba(59,130,246,0.08); color: #93C5FD; border: 1px solid rgba(59,130,246,0.15); }
+.tw-item.hidden { background: rgba(168,85,247,0.08); color: #C4B5FD; border: 1px solid rgba(168,85,247,0.15); }
 .tw-item.normal { background: rgba(30,41,59,0.5); color: #D1D5DB; }
-.tw-item.new { background: rgba(16,185,129,0.08); color: #6EE7B7; border: 1px solid rgba(16,185,129,0.15); }
+.tw-section-header { padding: 0.5rem; background: #1E293B; border: 1px solid #374151; border-radius: 0.375rem 0.375rem 0 0; cursor: pointer; display: flex; align-items: center; justify-content: space-between; }
+.tw-section-header:hover { background: #253044; }
+.tw-section-body { padding: 0.5rem; background: rgba(15,23,42,0.5); border: 1px solid #374151; border-top: none; border-radius: 0 0 0.375rem 0.375rem; margin-bottom: 0.5rem; }
 .tw-debrief { padding: 0.5rem; background: rgba(251,191,36,0.05); border: 1px solid rgba(251,191,36,0.15); border-radius: 0.375rem; margin-top: 0.5rem; }
 .tw-debrief-title { font-size: 0.688rem; font-weight: bold; color: #FBBF24; margin-bottom: 0.375rem; }
 .tw-debrief-item { font-size: 0.75rem; color: #FDE68A; padding: 0.125rem 0; }
-.tw-blindspot { padding: 0.75rem; background: rgba(127,29,29,0.3); border: 1px solid rgba(220,38,38,0.3); border-radius: 0.5rem; margin-bottom: 0.5rem; }
-.tw-blindspot h3 { color: #FCA5A5; font-size: 0.813rem; font-weight: bold; margin-bottom: 0.375rem; }
-.tw-blindspot p { color: #FECACA; font-size: 0.75rem; line-height: 1.5; }
-.tw-painpoint { padding: 0.75rem; background: rgba(30,58,138,0.3); border: 1px solid rgba(59,130,246,0.3); border-radius: 0.5rem; margin-bottom: 0.5rem; }
-.tw-painpoint-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.375rem; }
-.tw-painpoint h3 { color: #93C5FD; font-size: 0.813rem; font-weight: bold; }
-.tw-painpoint .mapTo { color: #6B7280; font-size: 0.688rem; }
-.tw-painpoint p { color: #BFDBFE; font-size: 0.75rem; line-height: 1.5; }
+.tw-team-row { padding: 0.375rem 0.5rem; background: rgba(30,41,59,0.5); border-radius: 0.25rem; margin-bottom: 0.25rem; font-size: 0.75rem; }
+.tw-rule { padding: 0.5rem; background: #1E293B; border: 1px solid #374151; border-radius: 0.375rem; margin-bottom: 0.375rem; font-size: 0.75rem; color: #D1D5DB; }
+.tw-rule-num { color: #FBBF24; font-weight: bold; margin-right: 0.25rem; }
+.tw-hw-row { padding: 0.5rem 0.625rem; border-radius: 0.375rem; margin-bottom: 0.375rem; font-size: 0.75rem; }
+.tw-hw-row.larson { background: rgba(139,92,246,0.12); border: 1px solid rgba(139,92,246,0.25); }
+.tw-hw-row.ziyi { background: rgba(236,72,153,0.1); border: 1px solid rgba(236,72,153,0.2); }
+.tw-hw-row.irvine { background: rgba(245,158,11,0.1); border: 1px solid rgba(245,158,11,0.2); }
+.tw-hw-row.peijia { background: rgba(16,185,129,0.1); border: 1px solid rgba(16,185,129,0.2); }
+.tw-hw-name { font-weight: bold; color: #F3F4F6; margin-bottom: 0.2rem; }
+.tw-hw-task { color: #D1D5DB; line-height: 1.4; }
+.tw-checklist-item { padding: 0.625rem 0.75rem; border-radius: 0.375rem; margin-bottom: 0.375rem; display: flex; align-items: flex-start; gap: 0.5rem; }
+.tw-checklist-item.red { background: rgba(127,29,29,0.3); border: 1px solid rgba(220,38,38,0.3); }
+.tw-checklist-item.yellow { background: rgba(120,80,0,0.3); border: 1px solid rgba(245,158,11,0.3); }
+.tw-checklist-item.green { background: rgba(5,46,22,0.4); border: 1px solid rgba(16,185,129,0.3); }
+.tw-checklist-dot { width: 0.5rem; height: 0.5rem; border-radius: 50%; flex-shrink: 0; margin-top: 0.25rem; }
+.tw-checklist-dot.red { background: #EF4444; }
+.tw-checklist-dot.yellow { background: #F59E0B; }
+.tw-checklist-dot.green { background: #10B981; }
+.tw-checklist-text { font-size: 0.75rem; color: #D1D5DB; line-height: 1.4; }
+.tw-mission-card { padding: 0.75rem; background: #1E293B; border-radius: 0.5rem; margin-bottom: 0.75rem; }
+.tw-mission-header { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem; }
+.tw-mission-name { font-size: 1rem; font-weight: 900; color: #F3F4F6; }
+.tw-mission-role { font-size: 0.75rem; color: #9CA3AF; }
 .tw-post-item { padding: 0.75rem; background: #1E293B; border: 1px solid #374151; border-radius: 0.5rem; margin-bottom: 0.5rem; }
 .tw-post-week { color: #60A5FA; font-size: 0.75rem; font-weight: bold; }
 .tw-post-action { color: #D1D5DB; font-size: 0.813rem; margin-top: 0.25rem; }
 .tw-footer { margin-top: 2rem; padding: 0.75rem; background: #1E293B; border-radius: 0.5rem; border: 1px solid #374151; text-align: center; }
 .tw-footer p { color: #4B5563; font-size: 0.75rem; }
-.tw-rule { padding: 0.5rem; background: #1E293B; border: 1px solid #374151; border-radius: 0.375rem; margin-bottom: 0.375rem; font-size: 0.75rem; color: #D1D5DB; }
-.tw-rule-num { color: #FBBF24; font-weight: bold; margin-right: 0.25rem; }
 .tw-time-badge { display: inline-block; background: rgba(59,130,246,0.2); color: #93C5FD; padding: 0.125rem 0.375rem; border-radius: 0.25rem; font-size: 0.625rem; font-weight: bold; margin-left: 0.375rem; }
-.hidden { display: none; }
 </style>
 </head>
 <body>
@@ -80,549 +91,753 @@ body, html { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFa
 <script>
 let lang = 'zh';
 let currentView = 'overview';
-let currentDay = 0;
-let currentBlock = 0;
-let layerState = { A: true, B: true, C: true };
+let currentBlock = { 1: 0, 2: 0, 3: 0 };
+let sectionOpen = { capture:true, ask:true, hidden:true, assign:true };
+// sub-item type for nested bullets
+// items can have .subs = [{zh,en}] for sub-bullets
 
 const t = (zh, en) => lang === 'zh' ? zh : en;
 
 const DATA = {
   mission: {
-    zh: '完全吸收从0→10的诊所变现链——让高端服务、系统架构和SaaS路径变得清晰，而不是凭空发明。',
-    en: 'Absorb the full 0→10 clinic monetization chain so premium offer, system architecture, and SaaS become OBVIOUS — not invented.'
+    zh: '学透许医师的整套诊所赚钱系统——从病人进门、成交疗程配套、到让他们一直回来。我们来这里是为了把所有东西吸收回去，让 ARIS 升级。',
+    en: 'Learn Hank\'s FULL clinic money-making system — from the moment a patient walks in, to closing packages, to getting them to come back again and again. We are here to ABSORB everything so we can level up ARIS.'
   },
-  layers: [
-    { id:'A', zh:'运营蓝图', en:'Operational Blueprint', color:'a', descZh:'Hank做了什么——患者旅程、话术脚本、定价、套餐', descEn:'WHAT Hank does — patient journey, scripts, pricing, packages' },
-    { id:'B', zh:'诊断框架', en:'Diagnostic Framework', color:'b', descZh:'Hank如何评估诊所、决定先修什么——让高端服务粘住客户的核心', descEn:'HOW Hank assesses clinics & decides what to fix — makes premium STICKY' },
-    { id:'C', zh:'系统/数据架构', en:'System/Data Architecture', color:'c', descZh:'具体字段、计算逻辑、阈值、仪表盘——我们用自己的技术栈重建', descEn:'Fields, calculations, thresholds, dashboards — what WE rebuild in our stack' },
+  painpoints: [
+    {
+      id: 'PP1',
+      zh: '佣金结构失衡 Commission Misalignment',
+      en: 'PP1: Commission Misalignment 佣金结构失衡',
+      mapZh: '→ Day 2 下午（系统深挖）',
+      mapEn: '→ Day 2 Afternoon (System Deep Dive)',
+      descZh: '从业者要求20-30%佣金——没有标准框架。提取：Hank如何设计与记分卡挂钩的佣金结构。',
+      descEn: 'Practitioners demand 20–30% commission — no standard framework. Extract: how Hank structures commission tied to scorecard performance.',
+    },
+    {
+      id: 'PP2',
+      zh: '第二次跟进断裂 2nd Follow-Up Breakdown',
+      en: 'PP2: 2nd Follow-Up Breakdown 第二次跟进断裂',
+      mapZh: '→ Day 1 下午（交接） + Day 3 上午',
+      mapEn: '→ Day 1 Afternoon (Handoff) + Day 3 Morning',
+      descZh: '患者第一次就诊后不回复。员工归咎线索质量或不知道说什么。提取：Hank的精确跟进序列。',
+      descEn: 'Patients don\'t reply after visit 1. Staff blame lead quality OR don\'t know what to say. Extract: Hank\'s exact follow-up sequence.',
+    },
+    {
+      id: 'PP3',
+      zh: '套餐成交失败（高高在上）Package Close Failure',
+      en: 'PP3: Package Close Failure 套餐成交失败',
+      mapZh: '→ Day 1 下午（交接环节）',
+      mapEn: '→ Day 1 Afternoon (THE HANDOFF)',
+      descZh: '从业者自行筛选谁值得推荐套餐。「不够严重」= 不推。这是文化和心态问题。核心交接问题。提取：Hank如何把销售重构为临床建议。',
+      descEn: 'Practitioners self-filter who gets pitched packages. "Not serious enough" = don\'t push. Culture + mindset problem. Core handoff issue. Extract: how Hank reframes sales as clinical recommendation.',
+    },
+    {
+      id: 'PP4',
+      zh: '续购追踪缺失 Renewal Tracking Gap',
+      en: 'PP4: Renewal Tracking Gap 续购追踪缺失',
+      mapZh: '→ Day 2 下午（系统）',
+      mapEn: '→ Day 2 Afternoon (System)',
+      descZh: '套餐到期，没有系统提醒，没有触发续购对话。患者悄悄流失。提取：Hank的系统如何标记即将到期的套餐。',
+      descEn: 'Packages expire with no system alert, no renewal trigger. Patients silently churn. Extract: how Hank\'s system flags expiring packages and triggers renewal conversation.',
+    },
   ],
   team: [
-    { name:'Larson', role:{zh:'架构师',en:'ARCHITECT'}, color:'#8B5CF6', focus:{zh:'系统逻辑、数据架构、诊断框架、商业模式、与Hank关系主导',en:'System logic, data architecture, diagnostic frameworks, business model, Hank relationship lead'}, daily:{zh:'每晚更新系统架构草图 + 列出当天Hank揭露的所有诊断洞察',en:'Updated system architecture sketch + list of every diagnostic insight Hank revealed'} },
-    { name:'ZiYi', role:{zh:'运营主管',en:'FULFILLMENT MGR'}, color:'#EC4899', focus:{zh:'运营工作流、SOP、员工交接、瓶颈、流程图',en:'Operational workflow, SOPs, staff handoffs, bottlenecks, process mapping'}, daily:{zh:'每晚1张流程图（手绘拍照也行）',en:'1 process flow diagram (hand-drawn photo OK)'} },
-    { name:'Irvine', role:{zh:'客户成功 CSM',en:'CSM / CLIENT SUCCESS'}, color:'#F59E0B', focus:{zh:'马来西亚落地转化——什么可用、什么不行、什么需要调整。追加销售。月度价值证明。',en:'MY translation — what works, what doesn\'t, what adapts. Upsell mechanics. Monthly value proof.'}, daily:{zh:'语音备忘或文字——最少5条：什么能在MY落地、什么不能、原因',en:'Voice memo or notes — min 5 observations: what translates to MY, what doesn\'t, reasoning'} },
-    { name:'Peijia', role:{zh:'患者旅程 CPS',en:'CPS / PATIENT JOURNEY'}, color:'#10B981', focus:{zh:'患者全程体验、前台、跟进、复诊预约、未到场处理、CPS整合点',en:'Patient experience E2E, front desk, follow-up, rebooking, no-show recovery, CPS integration'}, daily:{zh:'每晚1条完整患者旅程（从患者视角）——包括犹豫节点和成交/未成交结果',en:'1 complete patient journey from patient perspective — hesitation points + close/no-close outcome'} },
+    {
+      key: 'larson', name: 'Larson', color: '#8B5CF6',
+      role: { zh: '系统架构师 + 关系主导', en: 'Systems Architect + Relationship Lead' },
+      lens: { zh: '系统逻辑、数据架构、诊断框架、CPS Queue时机、商业模式全局', en: 'System logic, data architecture, diagnostic frameworks, CPS Queue reveal timing, business model' },
+      questions: [
+        { zh: '「当收入下降，你的诊断顺序是什么？一步一步来？」', en: '"When clinic revenue drops, what\'s your diagnostic sequence? Step by step?"' },
+        { zh: '「给我一个真实案例：你怎么诊断并修复一间诊所的营收问题？」', en: '"Real example: how did you diagnose & fix a specific clinic\'s revenue problem?"' },
+        { zh: '🔴 Day 3 才自然提及 CPS Queue——「我们团队已经建了生产级工作流系统」', en: '🔴 Day 3 only: naturally mention CPS Queue — "our team already builds production workflow systems"' },
+        { zh: '「如果只用3个数字判断诊所健康——是哪3个？」', en: '"If only 3 numbers to know clinic health — which 3?"' },
+      ],
+      daily: { zh: '系统架构草图（最新版）+ 今天Hank揭露的所有诊断洞察（决策树格式）', en: 'System architecture sketch (latest) + all diagnostic insights Hank revealed today (decision tree format)' }
+    },
+    {
+      key: 'ziyi', name: 'ZiYi', color: '#EC4899',
+      role: { zh: '运营 / 流程图', en: 'Operations / Process Mapper' },
+      lens: { zh: '运营工作流、SOP、员工交接、瓶颈、什么在MY实际能跑', en: 'Operational workflow, SOPs, staff handoffs, bottlenecks, what can actually run in MY' },
+      questions: [
+        { zh: '「如果要教MY诊所老板这个，他会反驳什么？」', en: '"If teaching MY clinic owner this, what pushback would they give?"' },
+        { zh: '「这个流程谁负责执行？治疗师还是前台？」', en: '"Who executes this step? Therapist or front desk?"' },
+        { zh: '「如果员工没做这一步，会怎样？有没有系统捕捉到？」', en: '"If staff skip this step, what happens? Does the system catch it?"' },
+      ],
+      daily: { zh: '1张流程图——从进门到买配套的病人旅程（手画拍照也可以）', en: '1 process flow diagram — patient journey from door to package (hand-drawn photo OK)' }
+    },
+    {
+      key: 'irvine', name: 'Irvine', color: '#F59E0B',
+      role: { zh: 'CSM / MY转化', en: 'CSM / MY Translation' },
+      lens: { zh: 'MY落地转化——什么可用、什么不行、什么要改。追加销售机制。月度价值证明。Map「价值证明」时刻 + PP1佣金结构笔记。', en: 'MY translation — what works, what doesn\'t, what adapts. Upsell mechanics. Monthly value proof. Map "value proof" moments + PP1 commission structure notes.' },
+      questions: [
+        { zh: '「PP1：治疗师佣金怎么结构？底薪vs绩效拆分？合理范围是什么？」', en: '"PP1: How structure therapist commission? Base vs performance split? Fair range?"' },
+        { zh: '「治疗师要求更高佣金时你怎么处理？」', en: '"How do you handle pushback when practitioners want higher commission?"' },
+        { zh: '「诊所老板看到什么让他觉得「值这个钱」？」', en: '"What does clinic owner see that makes them feel it\'s worth paying?"' },
+        { zh: '「Month 2以后怎么继续证明价值？不是靠「新鲜感」？」', en: '"After month 2, how do you continue proving value? Not just novelty?"' },
+      ],
+      daily: { zh: '最少5条观察：什么适用MY、什么不适用、什么要改、为什么（语音备忘或文字都行）', en: 'Min 5 observations: what translates to MY, what doesn\'t, what must adapt, why (voice memo or text)' }
+    },
+    {
+      key: 'peijia', name: 'Peijia', color: '#10B981',
+      role: { zh: 'CPS / 患者旅程', en: 'CPS / Patient Journey' },
+      lens: { zh: '患者全程体验、前台接触、跟进、复诊预约、CPS整合节点', en: 'Patient experience end-to-end, front desk contact, follow-up, rebooking, CPS integration points' },
+      questions: [
+        { zh: '「PP2：患者要离开时，有人预约下次吗？用什么话术？谁来做？」', en: '"PP2: When patient is about to leave, does anyone schedule next visit? Script? Who does it?"' },
+        { zh: '「PP4：套餐快到期时，系统怎么提醒？提前多久？通知谁？」', en: '"PP4: When package is expiring, how does system alert? How early? Who notified?"' },
+        { zh: '「患者第一次来和第五次来，体验有什么不同？」', en: '"How is the patient experience different on visit 1 vs visit 5?"' },
+      ],
+      daily: { zh: '1条完整患者旅程（从患者视角）——犹豫节点 + 成交/未成交结果', en: '1 complete patient journey from patient\'s perspective — hesitation points + close/no-close outcome' }
+    },
   ],
   rules: [
-    {zh:'录下一切——合同允许：培训、演示、方法论、系统屏幕录制（仅供内部使用）',en:'RECORD EVERYTHING — contract permits: training, demos, methodology, system screen recordings (internal use)'},
-    {zh:'每个人按自己的视角捕捉——不要所有人盯着同一件事',en:'Each person captures through OWN lens — don\'t all watch same thing'},
-    {zh:'每个环节结束后必须15分钟团队复盘——Hank说了什么 + 他没说什么',en:'Every session: 15-min team debrief — what Hank said + what he DIDN\'T say'},
-    {zh:'每天开始前Larson做10分钟简报——今天每个层的提取目标',en:'Morning: 10-min pre-brief from Larson — today\'s extraction targets per layer'},
-    {zh:'内容素材轮流拍，15秒短片，5%精力——不能干扰提取',en:'Content B-roll: rotate duty, 15-sec clips, 5% effort — DON\'T disrupt extraction'},
-    {zh:'永远不要问「能让我看系统代码吗？」——要问「当X发生时，你看哪些数据？」',en:'NEVER ask "show me code" — ask "when X happens, what data do you look at?"'},
-    {zh:'B层提问要像好奇心，不像审讯——「你怎么知道这就是问题所在？」',en:'Layer B questions = CURIOSITY not interrogation — "How did you know THIS was the problem?"'},
-    {zh:'每晚睡前把今日成果发到群里——没有任何借口',en:'Nightly deliverable to group chat BEFORE sleep — no excuses'},
+    { zh: '全程录制——培训、示范、系统画面（仅限内部使用）', en: 'Record everything — training, demos, system screens (internal use only)' },
+    { zh: '每个人用自己的角度看——不要四个人看同一个东西', en: 'Each person captures through their OWN lens — don\'t all watch same thing' },
+    { zh: '每个环节结束后15分钟团队复盘——Hank说了什么 + 他没说什么', en: 'Every session: 15-min team debrief — what Hank said + what he DIDN\'T say' },
+    { zh: '每天早上Larson做10分钟预告——今天要挖什么', en: 'Every morning: Larson 10-min pre-brief — today\'s extraction targets' },
+    { zh: '内容素材轮流负责——15秒短片，别影响学习', en: 'Content B-roll: rotate duty — 15-sec clips, DON\'T disrupt extraction' },
+    { zh: '绝对不要问「能不能看代码」——要问「当X发生时，你看什么数据？」', en: 'NEVER ask "can you show me the code" — ask: "when X happens, what data do you look at?"' },
+    { zh: '问问题像好奇，不是审问——「你怎么知道这是问题所在？」', en: 'Ask questions like curiosity, not interrogation — "How did you know THIS was the problem?"' },
+    { zh: '睡前把作业发到群里——没有借口', en: 'Before sleep: send nightly homework to group chat — no excuses' },
   ],
-  blindspots: [
-    {id:1, zh:'Hank的质量关卡', en:'Hank\'s Quality Gate', descZh:'Hank非常在意质量。他可能会放慢我们R&D的节奏，如果他觉得不放心。Day 3必须锁定客观标准：「什么最低标准能让您放心我们独立跑试点？具体指标是什么？」', descEn:'Hank\'s quality paranoia may slow R&D. MUST lock down objective criteria Day 3: "What minimum standard makes you comfortable with us running pilot independently? Specific metrics?"'},
-    {id:3, zh:'文化输出问题——谁能教？', en:'Culture Export Problem', descZh:'Hank说他的核心是心态转变：治疗师必须觉得这是医疗责任，不是销售。我们团队没有医疗从业者。必须提取：「非医疗培训师用正确的框架能不能交付这个心态培训？」', descEn:'Hank\'s core = mindset shift: therapist must feel it\'s MEDICAL responsibility, not sales. Our team has ZERO medical practitioners. Must extract: "Can non-medical trainer deliver with right framework?"'},
-    {id:4, zh:'系统合伙人——未知变量', en:'System Partner Wildcard', descZh:'Rogic系统开发者是Hank的另一个商业伙伴。行程中不会出现，但Hank可能在系统细节上自我审查。问运营逻辑（「你追踪什么、为什么」）不要问系统架构（「数据库怎么设计的」）。', descEn:'Rogic developer is Hank\'s separate partner. Won\'t be present but Hank may self-censor. Ask OPERATIONAL LOGIC ("what you track and why") not system architecture ("how DB structured").'},
-    {id:5, zh:'复诊缺口 = 标准服务就能修', en:'Rebooking Gap = Standard Tier Fix', descZh:'客户流失因为患者来一次就不回来了。这不仅是高端问题——修好标准服务的复诊追踪就能把留存率推回96%+，而且自然创造高端追加销售路径。', descEn:'Clients churn because patients visit once and don\'t return. Fix this in STANDARD tier → retention back to 96%+ AND natural upsell path to premium.'},
-    {id:6, zh:'CPS Queue展示时机', en:'CPS Queue Reveal Timing', descZh:'Hank以为我们只是营销公司。我们已经建了生产级SaaS应用。Day 1不要暴露。让他先教方法论。Day 3自然提及——「我们团队已经建了工作流系统」。这把他对我们的认知从「渠道合作」升级为「能建系统的技术创始人」。不要主动展示，让它在Day 3产品化讨论中自然浮现。', descEn:'Hank thinks we\'re just marketing agency. We\'ve built production SaaS. DON\'T reveal Day 1. Let him teach first. Day 3 casually mention — upgrades his perception from "distribution partner" to "technical founder". Don\'t present it — let it emerge naturally.'},
-  ],
-  painpoints: [
-    {id:'PP1', zh:'佣金结构失衡', en:'Commission Misalignment', descZh:'从业者要求20-30%佣金——没有标准框架。提取：Hank如何设计与记分卡挂钩的佣金结构。', descEn:'Practitioners demand 20-30% — no standard framework. Extract: how Hank structures commission tied to scorecard.', map:'Day 2 下午'},
-    {id:'PP2', zh:'第二次跟进断裂', en:'2nd Follow-Up Breakdown', descZh:'患者第一次就诊后不回复。员工归咎线索质量或不知道说什么。提取：Hank的精确跟进序列。', descEn:'Patients don\'t reply after visit 1. Staff blame lead quality OR don\'t know what to say. Extract: Hank\'s exact follow-up sequence.', map:'Day 1 下午 + Day 3 上午'},
-    {id:'PP3', zh:'套餐成交失败（高高在上）', en:'Package Close Failure', descZh:'从业者自行筛选谁值得推荐套餐。「不够严重」= 不推。这是文化和心态问题。核心交接问题。提取：Hank如何把销售重构为临床建议。', descEn:'Practitioners self-filter who gets pitched. "Not serious enough" = don\'t push. Culture/mindset problem. THE HANDOFF. Extract: how Hank reframes sales → clinical recommendation.', map:'Day 1 下午（交接环节）'},
-    {id:'PP4', zh:'续购追踪缺失', en:'Renewal Tracking Gap', descZh:'套餐到期，没有系统提醒，没有触发续购对话。患者悄悄流失。提取：Hank的系统如何标记即将到期的套餐。', descEn:'Packages expire, no system alert, no renewal trigger. Patients silently churn. Extract: how Hank\'s system flags expiring packages.', map:'Day 2 下午（系统）'},
-  ],
-  days: [
-    {
-      day: 1,
-      date: '3/4（周三）',
-      theme: { zh:'前台转化 + 开始后端', en:'FRONT DESK → FIRST CONVERSION + START BACKEND' },
-      subtitle: { zh:'患者如何进入、被评估、做出第一次购买决定 + 拉前Layer B诊断对话', en:'How patients enter, get assessed, make first purchase + pull forward Layer B diagnostic conversation' },
+  days: {
+    1: {
+      date: { zh: '3月4日（星期三）', en: '3/4 (Wed)' },
+      theme: { zh: '病人进门 → 第一次成交', en: 'Patient Walks In → First Package Close' },
+      goal: { zh: '当天结束时，我们要能画出从进门到第一次买配套的完整病人旅程，包括每一步说的每一句话。', en: 'By end of day, we should be able to draw the COMPLETE patient journey from door to first package sale, including every word said at each step.' },
       blocks: [
         {
-          time: '10:00-12:00',
-          title: { zh:'诊所环境 + 角色扮演演示', en:'Clinic Environment + Roleplay Demo' },
-          hank: { zh:'Hank带领环境总览，然后团队成员扮演患者，院长亲自演示完整接案流程', en:'Hank leads environment tour, then team members play patient while Hank personally demos full practitioner flow' },
-          sections: [
-            { layer:'A', items:[
-              {zh:'Map完整患者入院流程：进门→登记→等待→第一次接触',en:'Map full intake: enter → register → wait → first contact',type:'normal'},
-              {zh:'记录：前台说什么？什么表格？收集什么数据？',en:'Document: front desk says WHAT? What forms? What data collected?',type:'normal'},
-              {zh:'Walk-in vs 预约——处理方式有何不同？',en:'Walk-in vs appointment — handled differently how?',type:'normal'},
-              {zh:'患者前5分钟体验——这决定一切',en:'First 5 min patient experience — this determines EVERYTHING',type:'normal'},
-              {zh:'价格展示策略——什么可见、什么隐藏、为什么？',en:'Price display strategy — what visible, what hidden, why?',type:'normal'},
-              {zh:'🔴 角色扮演：Peijia扮患者，ZiYi负责录制，Irvine做MY转化笔记，Larson观察Hank技巧并映射到Layer B',en:'🔴 ROLEPLAY: Peijia plays patient, ZiYi records, Irvine takes MY translation notes, Larson watches Hank\'s technique + maps to Layer B',type:'critical'},
-            ]},
-            { layer:'B', items:[
-              {zh:'⭐ 问：「你第一次走进一间新诊所，最先看的3样东西是什么？」',en:'⭐ ASK: "First time walking into a new clinic, first 3 things you look at?"',type:'ask'},
-              {zh:'⭐ 问：「你怎么判断问题出在前台还是治疗师？」',en:'⭐ ASK: "How do you know problem is front desk vs therapist?"',type:'ask'},
-              {zh:'⭐ 问：「前台最常见的杀死营收的错误是什么？」',en:'⭐ ASK: "Most common front desk mistake that kills revenue?"',type:'ask'},
-              {zh:'👁️ 观察：Hank角色扮演时纠正了什么？那就是他的诊断本能',en:'👁️ OBSERVE: What does Hank correct during roleplay? That\'s his diagnostic instinct.',type:'observe'},
-            ]},
-            { layer:'C', items:[
-              {zh:'入院时什么患者数据进入系统？',en:'What patient data enters system at intake?',type:'normal'},
-              {zh:'📱 屏幕录制：入院界面、字段、工作流',en:'📱 SCREEN RECORD: intake screen, fields, workflow',type:'record'},
-              {zh:'⭐ 问：「你拉什么报告来看前台表现好不好？」',en:'⭐ ASK: "What report do you pull to check front desk performance?"',type:'ask'},
-            ]},
+          time: '10:00–12:00',
+          title: { zh: '诊所环境 + 角色扮演示范', en: 'Clinic Tour + Roleplay Demo' },
+          context: { zh: 'Hank带我们看诊所环境。我们团队扮演病人。许医师示范从头到尾的完整治疗师流程。', en: 'Hank shows clinic environment. Team roleplays as patient. Hank demos full practitioner flow start to finish.' },
+          capture: [
+            { zh: '完整接待流程：进门→登记→等待→第一次接触', en: 'Full intake flow: enter → register → wait → first contact', type: 'capture' },
+            { zh: '前台说什么？填什么表？收集什么资料？', en: 'What does front desk SAY? What forms? What data collected?', type: 'capture' },
+            { zh: '直接来 vs 预约——处理方式有什么不同？', en: 'Walk-in vs appointment — handled differently?', type: 'capture' },
+            { zh: '病人体验的头5分钟（这决定一切）', en: 'First 5 minutes of patient experience (this decides EVERYTHING)', type: 'capture' },
+            { zh: '价格展示：什么看得到、什么藏起来，为什么？', en: 'Price display: what\'s visible vs hidden, and WHY?', type: 'capture' },
           ],
-          teamAssign: [
-            {who:'Larson',zh:'跟着Hank，问Layer B问题，观察他的诊断行为',en:'Shadow Hank, ask Layer B questions, observe diagnostic behavior'},
-            {who:'ZiYi',zh:'画出物理动线——地板平面图 + 患者移动路径 + 员工位置',en:'Draw physical flow — floor plan + patient movement + staff positions'},
-            {who:'Irvine',zh:'思考：「如果我要教MY诊所老板这个，他会反驳什么？」',en:'Think: "If I teach MY clinic owner this, what pushback?"'},
-            {who:'Peijia',zh:'扮演患者角色 + 记录每个触点——看到什么、听到什么、填什么、等什么',en:'Play patient in roleplay + document every touchpoint'},
+          ask: [
+            { zh: '「第一次走进一间新诊所，你最先看哪3样东西？」', en: '"First time walking into a new clinic, what are the first 3 things you look at?"', type: 'ask' },
+            { zh: '「你怎么知道问题出在前台还是治疗师？」', en: '"How do you know if the problem is front desk or therapist?"', type: 'ask' },
+            { zh: '「前台最常犯的、最伤收入的错误是什么？」', en: '"Most common front desk mistake that kills revenue?"', type: 'ask' },
+          ],
+          hidden: [
+            {
+              zh: '🔍 Hank角色扮演中纠正的每件事，记下以下3点：',
+              en: '🔍 For EACH thing Hank corrects during roleplay, note these 3 things:',
+              type: 'hidden',
+              subs: [
+                { zh: '纠正了什么（行动）', en: 'WHAT he corrected (the action)' },
+                { zh: '为什么（背后思维）', en: 'WHY he corrected it (the thinking behind it)' },
+                { zh: '什么触发让他注意到——他怎么知道这是问题的？', en: 'What TRIGGER made him notice it — how did he know it was wrong?' },
+              ]
+            },
           ],
           debrief: [
-            {zh:'Hank在角色扮演中本能纠正了什么？（= 诊断框架线索）',en:'What did Hank instinctively correct in roleplay? (= diagnostic framework clue)'},
-            {zh:'哪些数据点他不问自答就提到了？（= 系统架构线索）',en:'What data points did he mention unprompted? (= system architecture clue)'},
-          ]
+            { zh: 'Hank本能地纠正了什么？（= 诊断本能）', en: 'What did Hank instinctively correct? (= his diagnostic instincts)' },
+            { zh: '他没人问就自己提到了什么数据？（= 系统线索）', en: 'What data points did he mention without anyone asking? (= system clues)' },
+          ],
+          assign: [
+            { who: 'Larson', cls: 'larson', zh: '跟着Hank，观察他的诊断行为，Map到系统架构', en: 'Shadow Hank, observe diagnostic behavior, map to system architecture' },
+            { who: 'ZiYi', cls: 'ziyi', zh: '画物理动线——地板平面图 + 病人移动路径 + 员工位置', en: 'Draw physical flow — floor plan + patient movement + staff positions' },
+            { who: 'Irvine', cls: 'irvine', zh: '思考：「如果我要教MY诊所老板这个，他会反驳什么？」', en: 'Think: "If teaching MY clinic owner this, what pushback would they give?"' },
+            { who: 'Peijia', cls: 'peijia', zh: '扮演患者角色 + 记录每个触点：看到什么、听到什么、填什么、等什么', en: 'Play patient in roleplay + document every touchpoint: saw, heard, filled, waited' },
+          ],
         },
         {
-          time: '12:00-15:00',
-          title: { zh:'午休 + 团队信息整理', en:'Lunch + Team Information Processing' },
-          hank: { zh:'无Hank——团队独立工作', en:'No Hank — team only' },
-          sections: [
-            { layer:'A', items:[
-              {zh:'整理上午所有笔记到共享文档',en:'Consolidate all morning notes into shared doc',type:'normal'},
-              {zh:'识别缺口——什么没抓到？',en:'Identify gaps — what didn\'t we capture?',type:'normal'},
-              {zh:'列出下午要问的优先问题',en:'List priority questions for afternoon session',type:'normal'},
-            ]},
+          time: '12:00–15:00',
+          title: { zh: '午餐 + 团队整理时间（许医师不在）', en: 'Lunch + Team Processing (No Hank)' },
+          context: { zh: '整合所有早上笔记，识别漏洞，准备下午问题清单。', en: 'Consolidate all morning notes, identify gaps, list priority questions for afternoon.' },
+          capture: [
+            { zh: '把早上所有笔记整合到共享文档', en: 'Consolidate all morning notes into shared doc', type: 'capture' },
+            { zh: '找出漏洞：我们漏掉了什么？', en: 'Identify gaps: what did we NOT capture?', type: 'capture' },
+            { zh: '列出下午要优先问的问题', en: 'List priority questions for afternoon session', type: 'capture' },
           ],
-          teamAssign: [
-            {who:'全员',zh:'午餐 + 非正式讨论上午观察',en:'Lunch + informal discussion of morning observations'},
-            {who:'Larson',zh:'准备下午Layer B诊断问题清单',en:'Prepare afternoon Layer B diagnostic question list'},
+          ask: [],
+          hidden: [],
+          debrief: [],
+          assign: [
+            { who: 'Larson', cls: 'larson', zh: '准备下午的诊断思维问题清单', en: 'Prep diagnostic question list for afternoon' },
+            { who: '全员', cls: 'all', zh: '整理各自笔记 + 午餐', en: 'Organize personal notes + lunch' },
           ],
-          debrief: []
         },
         {
-          time: '15:00-18:00',
-          title: { zh:'咨询流程 + 套餐成交 + 交接环节', en:'Consultation + Package Close + THE HANDOFF' },
-          hank: { zh:'Hank教治疗师首诊SOP、疗程方案、成交技巧、治疗师到柜台的交接流程', en:'Hank teaches therapist consultation SOP, treatment plans, closing techniques, therapist-to-front-desk handoff' },
-          sections: [
-            { layer:'A', items:[
-              {zh:'Map：患者进入治疗室→治疗师评估→解释诊断→呈现治疗方案',en:'Map: patient enters treatment room → therapist assess → explain diagnosis → present plan',type:'normal'},
-              {zh:'记录话术脚本：治疗师说什么？关键短语？锚定语言？',en:'Document SCRIPTS: therapist says what? Key phrases? Anchoring language?',type:'normal'},
-              {zh:'价格如何引入？套餐vs单次？付款条件？',en:'How is pricing introduced? Package vs single? Payment terms?',type:'normal'},
-              {zh:'什么异议会出现？如何处理？',en:'What objections come up? How handled?',type:'normal'},
-              {zh:'🔴 交接环节：治疗师完成后→如何传递给前台？',en:'🔴 THE HANDOFF: therapist finishes → how pass to front desk?',type:'critical'},
-              {zh:'🔴 在患者面前说的准确交接话术',en:'🔴 Exact handoff script said IN FRONT of patient',type:'critical'},
-              {zh:'🔴 系统中谁负责这个交接的责任归属？',en:'🔴 Who owns accountability for this handoff in the system?',type:'critical'},
-            ]},
-            { layer:'B', items:[
-              {zh:'⭐ 问：「多少%的治疗师能自然做到这个 vs 需要培训？」',en:'⭐ ASK: "What % of therapists can do this naturally vs need training?"',type:'ask'},
-              {zh:'⭐ 问：「治疗师不能成交时，通常根源是——技能、信心、还是激励？」',en:'⭐ ASK: "When therapist can\'t close, root cause — skill, confidence, or incentive?"',type:'ask'},
-              {zh:'⭐ 问：「培训一个治疗师到这个水平要多久？训练顺序是什么？」',en:'⭐ ASK: "How long to train therapist to this level? Training sequence?"',type:'ask'},
-              {zh:'🔴 问：「你怎么把销售重构成临床建议？不是商业行为？」',en:'🔴 ASK: "How do you REFRAME sales as clinical recommendation? Not commercial?"',type:'critical'},
-              {zh:'🔴 问：「你怎么修心态，不只是修脚本？」',en:'🔴 ASK: "How do you fix MINDSET, not just script?"',type:'critical'},
-              {zh:'🔴 问：「当从业者说『这个患者不够严重不需要套餐』——你怎么回应？」',en:'🔴 ASK: "When practitioner says patient not serious enough for package — your response?"',type:'critical'},
-              {zh:'⭐ 问：「非医疗培训师用正确框架能不能教这个心态转变？还是必须医疗人员？」',en:'⭐ ASK: "Can non-medical trainer deliver mindset training with right framework? Or MUST be medical?"',type:'ask'},
-              {zh:'👁️ 观察：Hank批评治疗师互动时——用什么标准？',en:'👁️ OBSERVE: When Hank critiques therapist interaction — what criteria?',type:'observe'},
-            ]},
-            { layer:'C', items:[
-              {zh:'系统如何追踪每个治疗师的成交率？',en:'How does system track per-therapist close rate?',type:'normal'},
-              {zh:'「套餐」的数据模型：字段——次数、价格、时长、治疗类型？',en:'Package data model: fields — sessions, price, duration, treatment type?',type:'normal'},
-              {zh:'📱 屏幕录制：新套餐如何在系统中创建',en:'📱 SCREEN RECORD: how new package created in system',type:'record'},
-              {zh:'⭐ 问：「诊所老板看到的治疗师表现仪表盘长什么样？」',en:'⭐ ASK: "What dashboard view does clinic owner see for therapist performance?"',type:'ask'},
-            ]},
+          time: '15:00–18:00',
+          title: { zh: '咨询 + 成交配套 + 关键交接', en: 'Consultation + Package Close + THE HANDOFF' },
+          context: { zh: '许医师示范：治疗师首次看诊SOP、治疗方案、怎么成交、以及关键的治疗师→前台交接。', en: 'Hank demos: therapist first-visit SOP, treatment plans, how to close, and the critical therapist → front desk handoff.' },
+          capture: [
+            { zh: '病人进房间→评估→解释诊断→呈现方案', en: 'Patient enters room → assessment → diagnosis explanation → plan presentation', type: 'capture' },
+            { zh: '关键话术：用的每一个字、锚定用语', en: 'KEY SCRIPTS: exact words used, anchoring language', type: 'capture' },
+            { zh: '价格怎么提出：配套 vs 单次；付款条件', en: 'How pricing is introduced: package vs single visit; payment terms', type: 'capture' },
+            { zh: '反对意见（objections）出现时怎么处理', en: 'How objections are handled when they come up', type: 'capture' },
           ],
-          teamAssign: [
-            {who:'Larson',zh:'关注B2B角度：怎么把这个培训卖给诊所老板？Pitch是什么？+ 交接提取',en:'Focus B2B angle: how to SELL this training to clinic owner? Pitch? + handoff extraction'},
-            {who:'ZiYi',zh:'SOP逐步记录，包括每步时间 + 交接流程图',en:'SOP step-by-step with timing + handoff flow diagram'},
-            {who:'Irvine',zh:'Map「价值证明」时刻——什么指标让诊所老板觉得值？+ PP1佣金结构笔记',en:'Map "value proof" moments — what metrics prove worth? + PP1 commission structure notes'},
-            {who:'Peijia',zh:'记录患者心理：什么让他们说好？什么让他们犹豫？+ 第一次就诊后的跟进序列',en:'Patient psychology: what makes them say yes/hesitate? + follow-up sequence after visit 1'},
+          ask: [
+            {
+              zh: '🔴 交接（整趟旅程最关键时刻）：',
+              en: '🔴 THE HANDOFF (most critical moment of entire trip):',
+              type: 'critical',
+              subs: [
+                { zh: '治疗师怎么把信息传给前台？', en: 'How does therapist pass information to front desk?' },
+                { zh: '在病人面前说的准确话术是什么？', en: 'What EXACT words are said IN FRONT of the patient?' },
+                { zh: '系统里谁负责这个交接的责任归属？', en: 'Who owns accountability for the handoff in the system?' },
+              ]
+            },
+            { zh: '「多少比例的治疗师天生会做 vs 需要培训？」', en: '"What % of therapists can do this naturally vs need training?"', type: 'ask' },
+            { zh: '「治疗师成交不了，根本原因是技能、信心、还是激励制度？」', en: '"When therapist can\'t close, root cause — skill, confidence, or incentive?"', type: 'ask' },
+            { zh: '「你怎么把「销售」重新定义为「临床建议」而不是「商业推销」？」', en: '"How do you reframe sales as clinical recommendation, not commercial?"', type: 'ask' },
+            { zh: '「当治疗师说「这个病人不够严重不需要配套」——你怎么回应？」（PP3）', en: '"When practitioner says patient not serious enough for package — how do you respond?" (PP3)', type: 'ask' },
+            { zh: '「非医疗背景的培训师能教这个心态转变吗？还是必须是医疗人员？」', en: '"Can non-medical trainer deliver mindset training with right framework? Or must be medical?"', type: 'ask' },
+          ],
+          hidden: [
+            {
+              zh: '🔍 决策树提取：对Hank描述的每个反对意见（objection）场景，记录完整分支逻辑：',
+              en: '🔍 Decision Tree Mapping: for EVERY objection scenario Hank describes, capture full branching logic:',
+              type: 'hidden',
+              subs: [
+                { zh: '如果病人说X → 治疗师回应Y', en: 'IF patient says X → therapist responds with Y' },
+                { zh: '如果病人表现抗拒类型A → 走路径1', en: 'IF patient shows resistance type A → response path 1' },
+                { zh: '如果病人表现抗拒类型B → 走路径2', en: 'IF patient shows resistance type B → response path 2' },
+              ]
+            },
           ],
           debrief: [
-            {zh:'这个咨询流程在MY能跑吗？什么需要调整？',en:'Can this consultation flow work in MY? What needs adapting?'},
-            {zh:'治疗师→前台的交接缺口——Hank怎么解决的？',en:'Therapist → front desk handoff gap — how does Hank solve?'},
-            {zh:'Hank的治疗师和典型MY诊所员工之间的培训差距有多大？',en:'Training gap between Hank\'s therapists and typical MY clinic staff?'},
-          ]
+            { zh: '这个咨询流程在MY能用吗？什么需要改？', en: 'Can this consultation flow work in MY? What needs to change?' },
+            { zh: '治疗师→前台的交接断层：许医师怎么解决的？', en: 'The therapist → front desk handoff gap: how does Hank solve it?' },
+            { zh: 'Hank治疗师和典型MY诊所员工之间的培训差距有多大？', en: 'Training gap between Hank\'s therapists and typical MY clinic staff?' },
+          ],
+          assign: [
+            { who: 'Larson', cls: 'larson', zh: '关注交接逻辑 + B2B角度：怎么把这个培训卖给诊所老板？', en: 'Focus on handoff logic + B2B angle: how to SELL this training to clinic owner?' },
+            { who: 'ZiYi', cls: 'ziyi', zh: 'SOP逐步记录，包括每步时间 + 交接流程图', en: 'SOP step-by-step with timing + handoff flow diagram' },
+            { who: 'Irvine', cls: 'irvine', zh: 'Map「价值证明」时刻 + PP1佣金结构笔记', en: 'Map "value proof" moments + PP1 commission structure notes' },
+            { who: 'Peijia', cls: 'peijia', zh: '记录患者心理：什么让他们说好？什么让他们犹豫？ + 第一次就诊后的跟进序列', en: 'Patient psychology: what makes them say yes/hesitate? + follow-up sequence after visit 1' },
+          ],
         },
         {
           time: '18:00+',
-          title: { zh:'拉前Layer B：诊断框架对话 ⭐ 关键追加', en:'Pull-Forward Layer B: Diagnostic Framework Conversation ⭐ KEY ADDITION' },
-          hank: { zh:'利用Day 1弹性时间——不看系统，纯对话提取诊断思维', en:'Use Day 1 flex time — no system demo, pure conversation to extract diagnostic thinking' },
-          sections: [
-            { layer:'B', items:[
-              {zh:'⭐⭐⭐ 这个时段拉前了原本Day 2的Layer B内容——因为Day 2只有3小时',en:'⭐⭐⭐ This block pulls forward Day 2 Layer B content — because Day 2 only has 3 hours',type:'critical'},
-              {zh:'⭐ 问：「当一间诊所整体营收下降，你的诊断顺序是什么？」',en:'⭐ ASK: "When clinic revenue drops, what\'s your diagnostic sequence?"',type:'ask'},
-              {zh:'⭐ 问：「给我一个真实例子——你怎么诊断并修复一间特定诊所的营收问题？」',en:'⭐ ASK: "Show me a real example — how did you diagnose & fix a specific clinic\'s revenue problem?"',type:'ask'},
-              {zh:'⭐ 问：「预测诊所会增长还是衰退的#1指标是什么？」',en:'⭐ ASK: "What\'s the #1 metric that predicts whether clinic grows or declines?"',type:'ask'},
-              {zh:'⭐ 问：「你怎么判断问题是定价、治疗师表现、还是患者获取？」',en:'⭐ ASK: "How do you know if problem is pricing, therapist performance, or patient acquisition?"',type:'ask'},
-              {zh:'🔴 问：「给我看你见过的表现最差的诊所数据——干预之前仪表盘长什么样？」',en:'🔴 ASK: "Show me worst-performing clinic data — what did dashboard look like BEFORE intervention?"',type:'critical'},
-              {zh:'🔴 问：「如果今天从零开始建你的系统，你会做什么不同？」',en:'🔴 ASK: "If building your system from scratch today, what would you do DIFFERENTLY?"',type:'critical'},
-            ]},
+          title: { zh: '晚餐 / 晚间诊断思维对话', en: 'Dinner / Evening Diagnostic Conversation' },
+          context: { zh: '弹性时间。不看系统。纯对话，挖掘许医师的诊断思维。', en: 'FLEX TIME. No system demo. Pure conversation to extract Hank\'s diagnostic THINKING.' },
+          capture: [],
+          ask: [
+            { zh: '「诊所收入下降时，你的诊断顺序是什么？一步一步来？」', en: '"When clinic revenue drops, what\'s your diagnostic sequence? Step by step?"', type: 'ask' },
+            { zh: '「给我一个真实案例：你怎么诊断和解决某间诊所的收入问题？」', en: '"Real example: how did you diagnose & fix a specific clinic\'s revenue problem?"', type: 'ask' },
+            { zh: '「预测诊所会成长还是衰退的第一指标是什么？」', en: '"The #1 metric that predicts whether a clinic grows or declines?"', type: 'ask' },
+            { zh: '「你怎么判断问题是定价、治疗师表现、还是患者获取？」', en: '"How do you know if the problem is pricing, therapist performance, or patient acquisition?"', type: 'ask' },
+            { zh: '🔴 「给我看表现最差诊所的数据——你修好之前仪表板长什么样？」', en: '🔴 "Show me worst-performing clinic data — what did dashboard look like BEFORE you fixed it?"', type: 'critical' },
           ],
-          teamAssign: [
-            {who:'Larson',zh:'主导这个对话。这是CEO提取模式。',en:'Lead this conversation. CEO extraction mode.'},
-            {who:'ZiYi',zh:'记录Hank提到的每个流程/系统细节',en:'Note every process/system detail Hank mentions'},
-            {who:'Irvine',zh:'记录每个与MY相关的诊断洞察',en:'Note every MY-relevant diagnostic insight'},
-            {who:'Peijia',zh:'记录每个与患者相关的数据点',en:'Note every patient-related data point mentioned'},
+          hidden: [
+            {
+              zh: '🔍 NEW — Agent Logic Extraction（仅限Larson）：对许医师描述的每个诊断步骤，记录：',
+              en: '🔍 NEW — Agent Logic Extraction (Larson only): For every diagnostic step Hank describes, capture:',
+              type: 'hidden',
+              subs: [
+                { zh: '什么条件让他去看这个指标？', en: 'What CONDITION triggers him to look at this metric?' },
+                { zh: '什么门槛代表"有问题了"？', en: 'What THRESHOLD means "this is a problem"?' },
+                { zh: '触发门槛时他采取什么行动？', en: 'What ACTION does he take when the threshold is hit?' },
+                { zh: '如果第一个方法没效，他接下来查什么？', en: 'What does he check NEXT if the first fix doesn\'t work?' },
+              ]
+            },
+            {
+              zh: '🔍 数据录入摩擦问题：',
+              en: '🔍 Data Input Friction Questions:',
+              type: 'hidden',
+              subs: [
+                { zh: '「让员工实际录入数据最大的困难是什么？」', en: '"What\'s the biggest problem getting staff to actually enter data?"' },
+                { zh: '「如果有任何数据可以自动收集不用人打字，你最想要什么？」', en: '"If you could have ANY data automatically captured without anyone typing, what would it be?"' },
+                { zh: '「有什么规律你希望能抓到但人总是会漏掉的？」', en: '"What patterns do you wish you could catch that humans always miss?"' },
+              ]
+            },
           ],
           debrief: [
-            {zh:'汇编Hank今天所有诊断评论——模式是什么？他第一个看什么？',en:'Compile all Hank diagnostic comments today — what\'s the pattern? What does he look at FIRST?'},
-            {zh:'明天下午的系统会议我们还需要问什么？',en:'What questions remain for tomorrow afternoon\'s system session?'},
-            {zh:'Larson：开始画你会build的系统架构',en:'Larson: start sketching system architecture you\'d build'},
-          ]
+            { zh: '把许医师的诊断流程整理成决策树', en: 'Compile Hank\'s diagnostic sequence as a decision tree' },
+            { zh: '今天所有诊断洞察汇总——他第一个看什么？模式是什么？', en: 'Compile all Hank diagnostic comments today — what\'s the pattern? What does he look at FIRST?' },
+            { zh: '开始草拟系统架构（Larson）', en: 'Start sketching system architecture (Larson)' },
+            { zh: '明天下午系统会议还需要问什么？', en: 'What questions remain for tomorrow afternoon\'s system session?' },
+          ],
+          assign: [
+            { who: 'Larson', cls: 'larson', zh: '主导这个对话。CEO提取模式。记录所有诊断洞察。', en: 'Lead this conversation. CEO extraction mode. Document all diagnostic insights.' },
+            { who: 'ZiYi', cls: 'ziyi', zh: '记录Hank提到的每个流程/系统细节', en: 'Note every process/system detail Hank mentions' },
+            { who: 'Irvine', cls: 'irvine', zh: '记录每个与MY相关的诊断洞察', en: 'Note every MY-relevant diagnostic insight' },
+            { who: 'Peijia', cls: 'peijia', zh: '记录每个与患者相关的数据点', en: 'Note every patient-related data point mentioned' },
+          ],
         },
-      ]
+      ],
+      homework: [
+        { who: 'Larson', cls: 'larson', zh: '系统架构草图v1 + 今天所有诊断洞察（决策树格式）', en: 'System architecture sketch v1 + ALL diagnostic insights from today (decision tree format)' },
+        { who: 'ZiYi', cls: 'ziyi', zh: '1个流程图——从进门到买配套的病人旅程（手画拍照可以）', en: '1 process flow diagram — patient journey from door to package (hand-drawn photo OK)' },
+        { who: 'Irvine', cls: 'irvine', zh: '最少5个观察：什么适用MY、什么不适用、什么要改、为什么', en: 'Min 5 observations: what works for MY, what doesn\'t, what must adapt, and WHY' },
+        { who: 'Peijia', cls: 'peijia', zh: '1个完整病人视角旅程——犹豫点 + 成交/未成交结果', en: '1 complete patient journey from patient\'s perspective — hesitation points + close/no-close outcome' },
+      ],
     },
-    {
-      day: 2,
-      date: '3/5（周四）',
-      theme: { zh:'团队处理 + 纯系统提取', en:'TEAM PROCESSING + PURE SYSTEM EXTRACTION' },
-      subtitle: { zh:'上午Hank不在——团队深度整理Day 1。下午14:00-17:00纯Layer C系统会议。', en:'Morning: Hank unavailable — team deep-processes Day 1. Afternoon 14:00-17:00: pure Layer C system session.' },
+    2: {
+      date: { zh: '3月5日（星期四）', en: '3/5 (Thu)' },
+      theme: { zh: '真实病人观摩 + 系统深挖', en: 'Live Patients + System Deep Dive' },
+      hankSchedule: { zh: '许医师不在：09:00–12:00 ｜ 许医师在：14:00–19:00+（可能一起吃晚餐）', en: 'Hank unavailable: 09:00–12:00 ｜ Hank available: 14:00–19:00+ (dinner possible)' },
+      goal: { zh: '当天结束时，我们要能描述许医师的精确系统——每个指标、每个计算方式、每个门槛、每个行动触发器。而且我们已经亲眼看过真实病人走完流程。', en: 'By end of day, describe Hank\'s EXACT system — every metric, every calculation, every threshold, every action trigger. AND we\'ve seen real patients go through the process.' },
       blocks: [
         {
-          time: '09:00-09:30',
-          title: { zh:'团队早餐', en:'Team Breakfast' },
-          hank: { zh:'无Hank——花莲吃早餐 + 非正式复盘', en:'No Hank — Hualien breakfast + informal debrief' },
-          sections: [
-            { layer:'A', items:[
-              {zh:'边吃边自然聊昨天观察到的——最好的洞察往往在非正式场合出来',en:'Chat naturally about yesterday\'s observations over food — best insights often emerge casually',type:'normal'},
-            ]},
-          ],
-          teamAssign: [
-            {who:'全员',zh:'放松吃，但保持讨论——不是旅游',en:'Relax and eat, but keep discussing — not tourism'},
-          ],
-          debrief: []
+          time: '09:00–09:30',
+          title: { zh: '团队早餐', en: 'Team Breakfast' },
+          context: { zh: '许医师不在（09:00–12:00）。轻松讨论，但保持讨论——不是来旅游的。', en: 'Hank unavailable 09:00–12:00. Casual discussion. Relax but keep discussing — not tourism.' },
+          capture: [],
+          ask: [],
+          hidden: [],
+          debrief: [],
+          assign: [{ who: '全员', cls: 'all', zh: '边吃边非正式复盘昨天的观察——最好的洞察往往在非正式场合出来', en: 'Informal discussion of yesterday\'s observations over food — best insights often emerge casually' }],
         },
         {
-          time: '09:30-11:00',
-          title: { zh:'结构化Day 1下载会议', en:'Structured Day 1 Download Session' },
-          hank: { zh:'无Hank——团队独立工作', en:'No Hank — team only' },
-          sections: [
-            { layer:'A', items:[
-              {zh:'每人展示昨天的交付物——团队验证并补充缺口',en:'Each person presents yesterday\'s deliverable — team validates and fills gaps',type:'normal'},
-              {zh:'ZiYi：流程图——团队检查是否完整',en:'ZiYi: process flow diagram — team checks completeness',type:'normal'},
-              {zh:'Irvine：5条MY转化笔记——团队讨论',en:'Irvine: 5 MY translation notes — team discusses',type:'normal'},
-              {zh:'Peijia：患者旅程——团队审查犹豫节点',en:'Peijia: patient journey — team reviews hesitation points',type:'normal'},
-              {zh:'Larson：诊断洞察清单——团队补充他们注意到的',en:'Larson: diagnostic insight list — team adds what they noticed',type:'normal'},
-            ]},
+          time: '09:30–11:00',
+          title: { zh: '第一天内容下载整理（许医师不在）', en: 'Day 1 Download Session (No Hank)' },
+          context: { zh: '每个人报告昨天的作业。团队验证并补漏。', en: 'Each person presents yesterday\'s homework. Team validates and fills gaps.' },
+          capture: [
+            { zh: 'ZiYi：流程图完整吗？漏了什么？', en: 'ZiYi: Is process diagram complete? What\'s missing?', type: 'capture' },
+            { zh: 'Irvine：讨论5个MY转化观察', en: 'Irvine: Discuss the 5 MY translation observations', type: 'capture' },
+            { zh: 'Peijia：检查病人旅程犹豫点', en: 'Peijia: Review patient journey hesitation points', type: 'capture' },
+            { zh: 'Larson：分享诊断洞察清单。团队补充他们注意到的。', en: 'Larson: Present diagnostic insight list. Team adds what they noticed.', type: 'capture' },
           ],
-          teamAssign: [
-            {who:'全员',zh:'3个问题：昨天抓得好的是什么？差点漏掉的是什么？今天下午必须问什么？',en:'3 questions: What captured well? What almost missed? What MUST ask this afternoon?'},
+          ask: [
+            {
+              zh: '团队一起回答3个问题：',
+              en: 'Team answers 3 questions together:',
+              type: 'ask',
+              subs: [
+                { zh: '我们抓得好的是什么？', en: 'What did we capture well? 我们抓得好的是什么？' },
+                { zh: '我们差点漏掉什么？', en: 'What did we ALMOST miss? 我们差点漏掉什么？' },
+                { zh: '今天下午一定要问什么？', en: 'What MUST we ask this afternoon? 今天下午一定要问什么？' },
+              ]
+            },
           ],
-          debrief: []
+          hidden: [],
+          debrief: [],
+          assign: [{ who: '全员', cls: 'all', zh: '一起回答3个团队问题，确认下午的重点', en: 'Answer 3 team questions together, confirm afternoon priorities' }],
         },
         {
-          time: '11:00-13:00',
-          title: { zh:'Larson系统架构预备 + 午餐', en:'Larson System Architecture Pre-Work + Lunch' },
-          hank: { zh:'无Hank——Larson独立工作', en:'No Hank — Larson solo work' },
-          sections: [
-            { layer:'C', items:[
-              {zh:'⭐⭐⭐ 下午系统会议前的关键准备',en:'⭐⭐⭐ Critical prep before afternoon system session',type:'critical'},
-              {zh:'基于Day 1学到的（交接、咨询流程、套餐展示），画出：如果在Supabase建，需要什么表？什么字段？什么关系？',en:'Based on Day 1 (handoff, consultation, packages): if building in Supabase, what tables? Fields? Relationships?',type:'normal'},
-              {zh:'识别缺口——什么还不知道？下午系统演示需要回答什么？',en:'Identify GAPS — what don\'t you know yet? What must afternoon session answer?',type:'normal'},
-              {zh:'这把下午从「给我看所有东西」变成「我已经懂运营流程了，现在具体告诉我X怎么追踪、Y怎么计算、Z怎么触发警报」',en:'This turns afternoon from "show me everything" into "I already understand the flow, now show me specifically how X is tracked, Y calculated, Z triggers alerts"',type:'normal'},
-            ]},
+          time: '11:00–13:00',
+          title: { zh: 'Larson系统架构准备 + 午餐', en: 'Larson System Architecture Pre-Work + Lunch' },
+          context: { zh: '这个环节让下午从「什么都给我看」变成精准提取。', en: 'This block turns the afternoon from "show me everything" to SURGICAL extraction.' },
+          capture: [],
+          ask: [],
+          hidden: [
+            {
+              zh: '🔍 Larson独自工作（Larson solo work）：基于第一天（交接、咨询流程、配套），草拟你会建什么：',
+              en: '🔍 Larson solo work: Based on Day 1 (handoff, consult flow, packages), sketch what you\'d build:',
+              type: 'hidden',
+              subs: [
+                { zh: '数据库表、字段、关系 Database tables, fields, relationships', en: 'Database tables, fields, relationships 数据库表、字段、关系' },
+                { zh: '找出漏洞：下午一定要回答什么 Identify gaps: what MUST the afternoon session answer', en: 'Identify gaps: what MUST the afternoon session answer 找出漏洞：下午一定要回答什么' },
+                { zh: '准备精准问题：X怎么追踪、Y怎么计算、Z怎么触发警报 Prepare surgical questions: how is X tracked, Y calculated, Z triggers alerts', en: 'Prepare surgical questions: how is X tracked, Y calculated, Z triggers alerts 准备精准问题：X怎么追踪、Y怎么计算、Z怎么触发警报' },
+              ]
+            },
           ],
-          teamAssign: [
-            {who:'Larson',zh:'独立画系统架构草图。准备下午的精准问题。',en:'Solo: sketch system architecture. Prepare surgical questions for afternoon.'},
-            {who:'其他',zh:'整理各自笔记 + 午餐 + 前往Hank诊所',en:'Organize notes + lunch + travel to Hank\'s clinic'},
+          debrief: [],
+          assign: [
+            { who: 'Larson', cls: 'larson', zh: '独自画系统架构草图，准备下午精准问题', en: 'Solo: sketch system architecture, prepare surgical questions for afternoon' },
+            { who: '其他', cls: 'all', zh: '整理笔记 + 午餐 + 前往诊所', en: 'Organize notes + lunch + travel to clinic' },
           ],
-          debrief: []
         },
         {
-          time: '14:00-17:00 ⭐',
-          title: { zh:'纯系统会议：营收追踪 + 治疗师记分卡 + 套餐设计', en:'Pure System Session: Revenue Tracking + Scorecards + Package Design' },
-          hank: { zh:'Hank演示系统、数据化管理逻辑——3小时集中Layer C', en:'Hank demos system, data management logic — 3 hours focused Layer C' },
-          sections: [
-            { layer:'A', items:[
-              {zh:'Map完整营收归因：患者治疗→付款→治疗师归功→绩效分数',en:'Map full revenue attribution: treatment → payment → therapist credit → performance score',type:'normal'},
-              {zh:'认列业绩——归功如何分配？',en:'認列業績 — how is credit assigned?',type:'normal'},
-              {zh:'共享治疗（多个治疗师）怎么处理？',en:'Shared treatments (multiple therapists) — how handled?',type:'normal'},
-              {zh:'所有套餐类型：什么治疗、什么时长、什么价位',en:'All package types: what treatments, duration, price points',type:'normal'},
-              {zh:'续购/复诊流程是什么？',en:'Renewal/rebooking process?',type:'normal'},
-            ]},
-            { layer:'C', items:[
-              {zh:'⭐⭐⭐ 这是最重要的系统会议——LARSON主导',en:'⭐⭐⭐ MOST IMPORTANT SYSTEM SESSION — LARSON LEADS',type:'critical'},
-              {zh:'📱 屏幕录制仪表盘的一切',en:'📱 SCREEN RECORD EVERYTHING on dashboards',type:'record'},
-              {zh:'记录记分卡上每个指标：字段名、计算方法、阈值、触发的行动',en:'Document EVERY metric on scorecard: field name, calculation, threshold, action trigger',type:'normal'},
-              {zh:'⭐ 对每个指标问：「这个数字背后跑什么计算？」',en:'⭐ For EVERY metric ask: "What calculation runs behind this number?"',type:'ask'},
-              {zh:'Map：数据输入→处理→仪表盘输出→决策触发',en:'Map: Data input → Processing → Dashboard output → Decision trigger',type:'normal'},
-              {zh:'⭐ 问：「如果只能看3个数字就知道诊所健不健康——是哪3个？」',en:'⭐ ASK: "If only 3 numbers to know clinic health — which 3?"',type:'ask'},
-              {zh:'画完整ERD（实体关系图）',en:'Sketch full ERD (Entity Relationship Diagram)',type:'normal'},
-              {zh:'🔴 PP1：「治疗师佣金怎么设计？底薪vs绩效拆分多少？公平范围是什么？」',en:'🔴 PP1: "How structure therapist commission? Base vs performance split? Fair range?"',type:'critical'},
-              {zh:'🔴 PP1：「从业者要求更高佣金时你怎么处理？」',en:'🔴 PP1: "How handle pushback from practitioners wanting higher commission?"',type:'critical'},
-              {zh:'🔴 PP4：「系统怎么处理套餐快到期？剩2次时有自动提醒吗？谁收到通知？」',en:'🔴 PP4: "How does system handle expiring packages? Auto-alert at 2 sessions left? Who gets notified?"',type:'critical'},
-              {zh:'🔴 PP4：「各诊所续购率多少？什么流程带来最高续购率？」',en:'🔴 PP4: "Renewal rate across clinics? What process gets highest renewal?"',type:'critical'},
-              {zh:'🆕 BECKER问：「周一早上你打开这个仪表盘，带我走一遍你看什么、按什么顺序看？」',en:'🆕 BECKER Q: "Monday morning, walk me through what you look at and in what order?"',type:'new'},
-              {zh:'套餐在系统中怎么建模？（字段、变体、价格层级）',en:'How are packages modeled in system? (Fields, variants, pricing tiers)',type:'normal'},
-              {zh:'什么报告显示「这个套餐表现好」vs「这个套餐该砍」？',en:'What reports show "this package performs" vs "this package should be killed"?',type:'normal'},
-              {zh:'⭐ 问：「你系统里套餐盈利的公式是什么？」',en:'⭐ ASK: "Formula for package profitability in your system?"',type:'ask'},
-            ]},
+          time: '14:00–17:00 ⭐',
+          title: { zh: '⭐ PART A: 真实病人观摩 + PART B: 收入系统深挖', en: '⭐ PART A: LIVE Patient Journey + PART B: Revenue System Deep Dive' },
+          context: { zh: '这是整趟旅程最重要的环节。许医师安排真实新病人。', en: 'THIS IS THE MOST IMPORTANT BLOCK OF THE ENTIRE TRIP. Hank arranges real new patients.' },
+          capture: [
+            { zh: '— PART A: 真实病人观摩 LIVE Patient Journey —', en: '— PART A: LIVE Patient Journey 真实病人观摩 —', type: 'normal' },
+            { zh: '观察完整链条：到达→接待→咨询→方案→配套→成交→首次治疗→预约下次', en: 'Watch FULL live chain: arrive → intake → consult → plan → package → close → first treatment → rebooking', type: 'capture' },
+            { zh: '对比第一天理论 vs 今天实况', en: 'Compare Day 1 theory vs TODAY\'S reality', type: 'capture' },
+            { zh: '时间：每个阶段实际花多长时间？', en: 'TIMING: how long does each stage ACTUALLY take?', type: 'capture' },
+            {
+              zh: '🔴 PP2关键观察：病人要走的时候——',
+              en: '🔴 PP2 Critical Watch — 2nd Follow-Up:',
+              type: 'critical',
+              subs: [
+                { zh: '病人要走的时候发生什么？', en: 'What happens as the patient is about to LEAVE? 病人要走的时候发生什么？' },
+                { zh: '有人预约下次吗？', en: 'Does ANYONE schedule the next visit? 有人预约下次吗？' },
+                { zh: '用什么话术？', en: 'What script is used? 用什么话术？' },
+                { zh: '治疗师还是前台做的？', en: 'Therapist or front desk does it? 治疗师还是前台做的？' },
+              ]
+            },
+            { zh: '（每个病人离开后问Hank）「1-10分，治疗师表现如何？什么扣分？」', en: '(After each patient leaves) "1-10, how did the therapist perform? What loses points?"', type: 'capture' },
+            { zh: '「如果这是一间经营困难的诊所，你会怎么做不同？」', en: '"What would you do differently if this was a struggling clinic?"', type: 'capture' },
+            { zh: '「这次看诊的什么数据会进入治疗师记分卡？」', en: '"What data from this visit feeds into the therapist scorecard?"', type: 'capture' },
+            { zh: '— PART B: 收入系统深挖 Revenue System Deep Dive —', en: '— PART B: Revenue System Deep Dive 收入系统深挖 —', type: 'normal' },
+            { zh: '📱 仪表板上的一切都要录屏', en: '📱 Screen record EVERYTHING on dashboards', type: 'capture' },
+            { zh: '收入归属：治疗→收款→治疗师业绩→绩效分数', en: 'Revenue attribution: treatment → payment → therapist credit → performance score', type: 'capture' },
+            { zh: '业绩认列怎么运作（認列業績）', en: 'How credit assignment works (認列業績)', type: 'capture' },
+            { zh: '多个治疗师共同处理：怎么分？', en: 'Shared treatments (multiple therapists): how handled?', type: 'capture' },
+            { zh: '所有配套类型：治疗项目、时长、价格', en: 'ALL package types: treatment, duration, price points', type: 'capture' },
+            { zh: '续购/预约流程', en: 'Renewal/rebooking process', type: 'capture' },
+            {
+              zh: '对记分卡上每个指标要抓（For EVERY metric on the scorecard, capture）：',
+              en: 'For EVERY metric on the scorecard, capture 对记分卡上每个指标要抓：',
+              type: 'capture',
+              subs: [
+                { zh: '1. 字段名称 Field name', en: '1. Field name 字段名称' },
+                { zh: '2. 计算方式 Calculation method', en: '2. Calculation method 计算方式' },
+                { zh: '3. 门槛（什么数字=好/坏）Threshold (what number = good/bad)', en: '3. Threshold (what number = good/bad) 门槛（什么数字=好/坏）' },
+                { zh: '4. 行动触发（达到门槛时做什么）Action trigger (what happens when threshold is hit)', en: '4. Action trigger (what happens when threshold is hit) 行动触发（达到门槛时做什么）' },
+              ]
+            },
           ],
-          teamAssign: [
-            {who:'Larson',zh:'这是你的时刻。你建了CPS Queue。你懂数据架构。提取逻辑，不是UI。Map每个计算、阈值、触发。',en:'YOUR session. You built CPS Queue. You understand data architecture. Extract LOGIC not UI. Map every calculation, threshold, trigger.'},
-            {who:'ZiYi',zh:'记录操作流程：谁输入数据、什么时候、多久一次、不做会怎样',en:'Document operational process: who enters data, when, how often, what if they don\'t'},
-            {who:'Irvine',zh:'关注：诊所老板看到什么？什么让他「哇这值钱」？+ 佣金结构',en:'Focus: what does CLINIC OWNER see? What makes them "wow worth paying"? + commission structure'},
-            {who:'Peijia',zh:'记录：患者数据如何从CPS等效触点流入这个系统？',en:'Document: how does patient data flow from CPS-equivalent touchpoints into this system?'},
+          ask: [
+            { zh: '「如果只用3个数字判断诊所健康——是哪3个？」', en: '"If only 3 numbers to know clinic health — what 3?"', type: 'ask' },
+            { zh: '「周一早上：带我走一遍你看什么、按什么顺序」', en: '"Monday morning: walk me through what you look at and in what order"', type: 'ask' },
+            { zh: '「这个数字背后跑的是什么计算？」（对每个指标）', en: '"What calculation runs behind this number?" (for each metric)', type: 'ask' },
+            { zh: '🔴 PP1佣金：「治疗师佣金怎么设计？底薪vs绩效怎么分？合理范围？」', en: '🔴 PP1 Commission: "How do you structure therapist commission? Base vs performance split? Fair range?"', type: 'critical' },
+            { zh: '🔴 PP1佣金：「治疗师要求更高佣金时你怎么处理？」', en: '🔴 PP1 Commission: "How do you handle pushback when practitioners want higher commission?"', type: 'critical' },
+            { zh: '🔴 PP4续购：「系统怎么处理快到期的配套？剩2次自动提醒？通知谁？」', en: '🔴 PP4 Renewal: "How does the system handle expiring packages? Auto-alert at 2 sessions left? Who gets notified?"', type: 'critical' },
+            { zh: '🔴 PP4续购：「什么流程创造最高续购率？」', en: '🔴 PP4 Renewal: "What process creates the highest renewal rate?"', type: 'critical' },
+          ],
+          hidden: [
+            {
+              zh: '🔍 NEW — Agent Action Logic（仅限Larson）：对每个仪表板指标加这个问题：',
+              en: '🔍 NEW — Agent Action Logic (Larson only): For EVERY dashboard metric, add this question:',
+              type: 'hidden',
+              subs: [
+                { zh: '「当这个数字变红时，你具体做什么？带我走一遍——打给谁、说什么、接下来查什么？」', en: '"When this number goes red, what EXACTLY do you do? Walk me through — who do you call, what do you say, what do you check next?"' },
+              ]
+            },
           ],
           debrief: [
-            {zh:'能在Supabase + 我们的栈重建吗？数据模型是什么？',en:'Can rebuild in Supabase + our stack? What\'s the data model?'},
-            {zh:'MY试点的最小可行仪表盘是什么？',en:'Minimum viable dashboard for MY pilot?'},
-            {zh:'Hank说的#1诊所健康预测指标是什么？',en:'Hank\'s #1 clinic health predictor?'},
-            {zh:'Larson：今晚完善ARIS Healthcare Revenue OS数据模型草图',en:'Larson: refine ARIS Healthcare Revenue OS data model sketch tonight'},
-            {zh:'Irvine：写「高端月度优化手册」大纲',en:'Irvine: write Premium Monthly Optimization Playbook outline'},
-          ]
+            { zh: '能在我们自己的技术栈重建吗？数据模型是什么？', en: 'Can we rebuild in our own tech stack? What\'s the data model?' },
+            { zh: 'MY试点的最小可行仪表板是什么？', en: 'Minimum viable dashboard for MY pilot?' },
+            { zh: '许医师的第一诊所健康预测指标是什么？', en: 'Hank\'s #1 clinic health predictor metric?' },
+          ],
+          assign: [
+            { who: 'Larson', cls: 'larson', zh: '这是你的时刻。提取逻辑，不是UI。Map每个计算、阈值、触发。你建了CPS Queue——用这个思维框架提取。', en: 'YOUR session. You built CPS Queue. Extract LOGIC not UI. Map every calculation, threshold, trigger.' },
+            { who: 'ZiYi', cls: 'ziyi', zh: '记录操作流程：谁输入数据、什么时候、多久一次、不做会怎样', en: 'Document operational process: who enters data, when, how often, what if they don\'t' },
+            { who: 'Irvine', cls: 'irvine', zh: '关注诊所老板看到什么、什么让他「哇这值钱」 + PP1佣金结构', en: 'Focus on what CLINIC OWNER sees, what makes them "wow worth paying" + PP1 commission structure' },
+            { who: 'Peijia', cls: 'peijia', zh: '记录：患者数据如何从CPS等效触点流入这个系统', en: 'Document: how patient data flows from CPS-equivalent touchpoints into this system' },
+          ],
         },
-      ]
+        {
+          time: '17:00–19:00+',
+          title: { zh: '延伸系统环节 / 晚餐', en: 'Extended System Session / Dinner' },
+          context: { zh: '用这段时间补完第四节没完成的。如果时间允许，深化套餐建模和数据录入逻辑。', en: 'Use this time for anything NOT finished in Block 4. Deepen package modeling and data entry if time allows.' },
+          capture: [],
+          ask: [
+            { zh: '「哪个报表显示「这个配套有效」 vs 「砍掉它」？', en: '"Which reports show \'this package performs\' vs \'this package should be killed\'?"', type: 'ask' },
+            { zh: '「你系统里配套获利能力的公式？」', en: '"Formula for package profitability in your system?"', type: 'ask' },
+            { zh: '「谁输入数据、什么时候、多频繁？如果不录入会怎样？」', en: '"Who inputs what, when, how often? What happens if they DON\'T?"', type: 'ask' },
+          ],
+          hidden: [],
+          debrief: [
+            { zh: '能用我们的技术栈重建吗？数据模型草图', en: 'Can rebuild with our stack? Data model sketch' },
+            { zh: 'MY试点的最小可行仪表板', en: 'Minimum viable dashboard for MY pilot' },
+          ],
+          assign: [{ who: '全员', cls: 'all', zh: '继续补充各自的专注领域笔记', en: 'Continue filling notes in each person\'s focus area' }],
+        },
+      ],
+      homework: [
+        { who: 'Larson', cls: 'larson', zh: '优化版ARIS医疗收入OS数据模型草图（表、字段、计算、门槛）', en: 'Refined ARIS Healthcare Revenue OS data model sketch (tables, fields, calculations, thresholds)' },
+        { who: 'ZiYi', cls: 'ziyi', zh: '验证流程图：第一天理论 vs 第二天现实——标注每个差异', en: 'Validated process map: Day 1 theory vs Day 2 live reality — mark every deviation' },
+        { who: 'Irvine', cls: 'irvine', zh: '草拟「高端月度优化手册」大纲 + 佣金结构笔记', en: 'Draft "Premium Monthly Optimization Playbook" outline + commission structure notes' },
+        { who: 'Peijia', cls: 'peijia', zh: '完整CPS相关触点地图：每个病人数据应流入系统的节点', en: 'Complete CPS-relevant touchpoint map: every point where patient data should flow into system' },
+      ],
     },
-    {
-      day: 3,
-      date: '3/6（周五）',
-      theme: { zh:'实战1→10 + 整合 + 未来', en:'LIVE 1→10 + INTEGRATION + FUTURE' },
-      subtitle: { zh:'真实患者全流程观摩，然后锁定产品化框架和合作对齐', en:'Live patients full observation, then lock down productization framework + partnership alignment' },
+    3: {
+      date: { zh: '3月6日（星期五）', en: '3/6 (Fri)' },
+      theme: { zh: '产品化 + 合作 + 未来', en: 'Productization + Partnership + Future' },
+      goal: { zh: '离开台湾时我们要有：(1) 可以在MY试点的已验证产品框架 (2) 许医师的品质标准 (3) 合作的明确下一步 (4) 脑中的60天研发路线图', en: 'We leave Taiwan with: (1) A validated product framework we can pilot in MY, (2) Hank\'s quality gate criteria, (3) Clear next steps for partnership, (4) 60-day R&D roadmap in our heads.' },
       blocks: [
         {
-          time: '依预约而定',
-          title: { zh:'实战患者旅程观摩（真实患者）', en:'LIVE Patient Journey Observation (Real Patients)' },
-          hank: { zh:'Hank安排了新患者——全程1→10实战跟诊', en:'Hank arranged new patients — full 1→10 live observation with shadowing' },
-          sections: [
-            { layer:'A', items:[
-              {zh:'🔴 观摩完整链条LIVE：患者到达→入院→咨询→治疗方案→呈现套餐→成交→首次治疗→复诊预约',en:'🔴 OBSERVE FULL CHAIN LIVE: arrive → intake → consultation → plan → package → close → treatment → rebooking',type:'critical'},
-              {zh:'对比Day 1-2学到的 vs 真实患者实际发生的',en:'Compare Day 1-2 theory vs what ACTUALLY happens with real patients',type:'normal'},
-              {zh:'记录时间：每个阶段实际花多久？',en:'Document timing: how long does each stage ACTUALLY take?',type:'normal'},
-              {zh:'🔴 PP2：特别观察患者要离开时发生什么——有人安排下次吗？脚本是什么？治疗师还是前台做？',en:'🔴 PP2: Watch SPECIFICALLY what happens when patient is about to leave — anyone schedule next visit? Script? Therapist or front desk?',type:'critical'},
-            ]},
-            { layer:'B', items:[
-              {zh:'👁️ 观察Hank在实战中——他在哪里干预？纠正什么？',en:'👁️ WATCH HANK DURING LIVE — where does he intervene? What corrects?',type:'observe'},
-              {zh:'⭐ 问（患者离开后）：「如果这是一间困难诊所你会怎么做不同？」',en:'⭐ ASK (after patient leaves): "What differently if this was a struggling clinic?"',type:'ask'},
-              {zh:'⭐ 问：「1-10分，这个治疗师表现如何？具体哪里扣分？」',en:'⭐ ASK: "1-10, how did therapist perform? What specifically loses points?"',type:'ask'},
-              {zh:'⭐ 问：「如果这间诊所付我们RM10k/月，我们的月度优化报告会说什么？」',en:'⭐ ASK: "If this clinic paid us RM10k/month, what would our monthly report say?"',type:'ask'},
-            ]},
-            { layer:'C', items:[
-              {zh:'患者互动结束后：去系统看数据怎么录入的',en:'After patient interaction: go to system, see how data got entered',type:'normal'},
-              {zh:'追踪：一切都准确录入了吗？什么遗漏了？',en:'Track: everything captured accurately? What got missed?',type:'normal'},
-              {zh:'⭐ 问：「这次患者就诊的什么数据进入治疗师记分卡？」',en:'⭐ ASK: "What data from this visit feeds into therapist scorecard?"',type:'ask'},
-              {zh:'这是你数据模型的最终验证——现实match系统吗？',en:'Final validation of your data model — does reality match system?',type:'normal'},
-            ]},
+          time: '早上 Morning',
+          title: { zh: '产品化 + 差距分析', en: 'Productization Session + Gap Analysis' },
+          context: { zh: '我们把两天学到的东西呈现给许医师。他来验证和纠正。', en: 'We present BACK to Hank what we captured over 2 days. He validates and corrects.' },
+          capture: [
+            { zh: '向Hank回报我们抓到的——获得验证和纠正', en: 'Present back to Hank what we captured — get validation and corrections', type: 'capture' },
+            { zh: '讨论MY治疗师培训：语言/文化/市场差异', en: 'Discuss MY therapist training: language/culture/market differences', type: 'capture' },
           ],
-          teamAssign: [
-            {who:'Larson',zh:'分配：50%看Hank的诊断反应，50%映射到你的系统架构',en:'Split: 50% watch Hank\'s diagnostic reactions, 50% map to your system architecture'},
-            {who:'ZiYi',zh:'用Day 1-2的流程图对照现实。记录每个偏差。',en:'Validate Day 1-2 process maps vs reality. Note EVERY deviation.'},
-            {who:'Irvine',zh:'想CSM角度：「基于今天看到的，我给诊所老板的月度报告长什么样？」',en:'Think CSM: "Monthly report for clinic owner based on today?"'},
-            {who:'Peijia',zh:'这是你的时刻：全程观察患者旅程，map每个CPS相关触点',en:'YOUR session: watch patient journey end-to-end, map every CPS-relevant touchpoint'},
+          ask: [
+            { zh: '「我们漏了什么？那看不见的20%但让80%起作用的东西？」', en: '"What did we miss? The 20% we can\'t see that makes the 80% work?"', type: 'ask' },
+            { zh: '🔴🔴🔴 整趟旅程最重要的问题：「如果我们下个月评估5间MY诊所，带我完整走一遍你怎么做第一次评估——你问什么、要求什么数据、怎么决定先修什么？」', en: '🔴🔴🔴 MOST IMPORTANT QUESTION OF ENTIRE TRIP: "If assessing 5 MY clinics next month, walk me through EXACTLY how you do the first assessment — what ask, what data request, how decide what to fix first?"', type: 'critical' },
+            { zh: '「诊所有10个问题。你怎么选先处理哪3个？」', en: '"Clinic has 10 problems. How do you pick the first 3?"', type: 'ask' },
+            { zh: '「诊断一间诊所需要的最少数据？」', en: '"Minimum data needed to diagnose a clinic?"', type: 'ask' },
+            { zh: '「基于你对我们的了解（带患者进来、预约、跟进电话）——你觉得我们客户有什么问题是我们自己看不到的？」', en: '"Based on what you know about our service (lead gen, booking, follow-up calls) — what problems do you think our clients have that WE might not see?"', type: 'ask' },
+          ],
+          hidden: [
+            {
+              zh: '🔍 拿系统架构草图给许医师看（Present system architecture sketch to Hank for feedback）：',
+              en: '🔍 Present system architecture sketch to Hank for feedback 拿系统架构草图给许医师看：',
+              type: 'hidden',
+              subs: [
+                { zh: '「如果我建了这个仪表板，少了什么？」', en: '"If I built this dashboard, what\'s missing?"' },
+                { zh: '「什么警报/自动化如果存在会让你的工作更轻松？」', en: '"What alerts or automations would make your life easier if they existed?"' },
+              ]
+            },
           ],
           debrief: [
-            {zh:'现实 vs 理论：什么不同？',en:'Reality vs Theory: what\'s different?'},
-            {zh:'月度优化报告对这间诊所长什么样？',en:'Monthly optimization report for this clinic?'},
-            {zh:'60天内在MY可以测试的最小可行版本是什么？',en:'Minimum viable version testable in MY within 60 days?'},
-          ]
+            { zh: '旅程总结：我们的研发路线图现在是什么？', en: 'Trip capstone: what is our R&D roadmap now?' },
+          ],
+          assign: [
+            { who: 'Larson', cls: 'larson', zh: '主导产品化对话。CEO架构师模式。在Day 3自然展现技术能力（CPS Queue）。', en: 'Lead productization conversation. CEO architect mode. Day 3: naturally reveal technical capability (CPS Queue).' },
+            { who: 'ZiYi', cls: 'ziyi', zh: '记录Hank纠正或补充的一切——这些是我们理解中的缺口', en: 'Note everything Hank corrects or adds — these are gaps in our understanding' },
+            { who: 'Irvine', cls: 'irvine', zh: '推动CSM相关内容：月度触点、报告节奏、升级触发', en: 'Push for CSM pieces: monthly touchpoints, reporting cadence, escalation triggers' },
+            { who: 'Peijia', cls: 'peijia', zh: '推动CPS整合：什么患者数据流应该触发什么CPS动作？', en: 'Push for CPS integration: what patient data flows trigger what CPS actions?' },
+          ],
         },
         {
-          time: '实战结束后 (2小时)',
-          title: { zh:'产品化框架 + 缺口分析', en:'Productization Framework + Gap Analysis' },
-          hank: { zh:'协作环节——Hank + 你的团队一起讨论如何产品化', en:'Collaborative session — Hank + your team working through productization' },
-          sections: [
-            { layer:'A', items:[
-              {zh:'向Hank回报你们抓到的——获得验证和纠正',en:'Present back to Hank what you captured — get validation and corrections',type:'normal'},
-              {zh:'⭐ 问：「我们漏了什么？我们看不到的20%但让80%起作用的是什么？」',en:'⭐ ASK: "What did we miss? The 20% we can\'t see that makes the 80% work?"',type:'ask'},
-              {zh:'讨论：MY治疗师的培训顺序（语言、文化、市场差异）',en:'Discuss: training sequence for MY therapists (language, culture, market differences)',type:'normal'},
-            ]},
-            { layer:'B', items:[
-              {zh:'🔴🔴🔴 整个行程最重要的问题：',en:'🔴🔴🔴 THE MOST IMPORTANT QUESTION OF THE ENTIRE TRIP:',type:'critical'},
-              {zh:'⭐ 问：「Hank，如果我们下个月要评估5间MY诊所，带我完整走一遍你怎么做第一次评估。你问什么？要什么数据？怎么决定先修什么？」',en:'⭐ ASK: "Hank, if assessing 5 MY clinics next month, walk me through exactly how you\'d do first assessment. What do you ask? What data request? How decide what to fix first?"',type:'ask'},
-              {zh:'🔴 让他角色扮演这个。录下来。这就是高端咨询方法论。',en:'🔴 GET HIM TO ROLEPLAY THIS. RECORD IT. This IS the premium consulting methodology.',type:'critical'},
-              {zh:'⭐ 问：「优先排序修复的框架是什么？诊所有10个问题，怎么选前3个？」',en:'⭐ ASK: "Framework for prioritizing fixes? Clinic has 10 problems, how pick first 3?"',type:'ask'},
-              {zh:'⭐ 问：「诊断一间诊所需要的最少数据是什么？」',en:'⭐ ASK: "Minimum data needed to diagnose a clinic\'s problem?"',type:'ask'},
-              {zh:'🆕 未知的未知：「Hank，基于你对我们服务的了解（带患者进来、预约、跟进电话）——你觉得我们客户有什么问题是我们自己可能看不到的？」',en:'🆕 UNKNOWN-UNKNOWN: "Hank, based on what you know about our service — what problems do you think our clients have that WE might not see?"',type:'new'},
-            ]},
-            { layer:'C', items:[
-              {zh:'向Hank展示你的系统架构草图——获得他的输入',en:'Present your system architecture sketch to Hank — get his input',type:'normal'},
-              {zh:'⭐ 问：「如果我建了这个仪表盘，缺什么？」',en:'⭐ ASK: "If I built this dashboard, what\'s missing?"',type:'ask'},
-              {zh:'⭐ 问：「什么警报或自动化如果存在会让你的工作更轻松？」',en:'⭐ ASK: "What alerts or automations would make your life easier if they existed?"',type:'ask'},
-              {zh:'🆕 在这里自然提及CPS Queue能力——「我们团队已经建了生产级的工作流系统」。不要主动展示，让它在对话中自然出来。',en:'🆕 Naturally mention CPS Queue capability here — "our team already builds production workflow systems". Don\'t present it — let it emerge naturally.',type:'new'},
-            ]},
+          time: '最后 1-2 小时',
+          title: { zh: '合作方向 + 下一步', en: 'Partnership Alignment + Next Steps' },
+          context: { zh: '真诚感谢许医师。对齐未来合作。锁定质量关卡。', en: 'Thank Hank sincerely. Align on future collaboration. Lock down quality gate.' },
+          capture: [
+            { zh: '真诚感谢Hank——认可他分享的深度', en: 'Thank Hank authentically — acknowledge depth of sharing', type: 'capture' },
+            { zh: '确认Phase 1 R&D时间线：回到MY后1-2个月', en: 'Confirm Phase 1 R&D timeline: 1-2 months after returning to MY', type: 'capture' },
+            { zh: '确认持续支持：合约 = 每月2次通话至2026年7月', en: 'Confirm ongoing support: contract = 2 calls/month until July 2026', type: 'capture' },
+            { zh: '讨论MY哪3间诊所做试点', en: 'Discuss which 3 MY clinics for pilot', type: 'capture' },
+            { zh: '对齐后续沟通节奏', en: 'Align communication cadence going forward', type: 'capture' },
           ],
-          teamAssign: [
-            {who:'Larson',zh:'主导产品化对话。CEO架构师模式。自然展现技术能力。',en:'Lead productization conversation. CEO architect mode. Reveal technical capability naturally.'},
-            {who:'ZiYi',zh:'记录Hank纠正或补充的一切——这些是我们理解中的缺口',en:'Note everything Hank corrects or adds — these are gaps in our understanding'},
-            {who:'Irvine',zh:'推动CSM相关内容：月度触点、报告节奏、升级触发',en:'Push for CSM pieces: monthly touchpoints, reporting cadence, escalation triggers'},
-            {who:'Peijia',zh:'推动CPS整合：什么患者数据流应该触发什么CPS动作？',en:'Push for CPS integration: what patient data flows trigger what CPS actions?'},
+          ask: [
+            { zh: '🔴 品质关卡（一定要问）：「什么最低标准让你放心让我们独立跑试点？给我们具体指标。」', en: '🔴 QUALITY GATE (MUST ask): "What minimum standard makes you comfortable with us running pilot independently? Give us specific metrics."', type: 'critical' },
           ],
-          debrief: [{zh:'这是行程的终章。我们的R&D路线图现在是什么？',en:'Trip capstone. What\'s our R&D roadmap now?'}]
-        },
-        {
-          time: '最后1小时',
-          title: { zh:'合作对齐 + 下一步', en:'Partnership Alignment + Next Steps' },
-          hank: { zh:'关系收尾——面向未来的对话', en:'Relationship closure — future-facing conversation' },
-          sections: [
-            { layer:'A', items:[
-              {zh:'真诚感谢Hank——认可他分享的深度',en:'Thank Hank authentically — acknowledge depth of sharing',type:'normal'},
-              {zh:'确认：Phase 1 R&D时间线（回MY后1-2个月）',en:'Confirm: Phase 1 R&D timeline (1-2 months back in MY)',type:'normal'},
-              {zh:'确认：持续支持（合约：每月2次通话到2026年7月）',en:'Confirm: ongoing support (contract: 2x/month calls until July 2026)',type:'normal'},
-              {zh:'讨论：哪3间MY诊所适合当试点？',en:'Discuss: which 3 MY clinics for pilot?',type:'normal'},
-              {zh:'对齐后续沟通节奏',en:'Align communication cadence going forward',type:'normal'},
-              {zh:'🔴 质量关卡：「什么最低标准能让您放心我们独立跑试点？具体指标是什么？」',en:'🔴 QUALITY GATE: "What minimum standard makes you comfortable with us running pilot independently? Specific metrics?"',type:'critical'},
-            ]},
-          ],
-          teamAssign: [
-            {who:'Larson',zh:'主导。未来自我模式。长期伙伴，不是短期提取者。',en:'Lead. Future Self mode. Long-term partner, not short-term extractor.'},
-            {who:'ZiYi',zh:'记录做出的承诺',en:'Note commitments made'},
-            {who:'Irvine',zh:'记录CSM相关的承诺或支持',en:'Note CSM-relevant commitments'},
-            {who:'Peijia',zh:'记录CPS相关的后续事项',en:'Note CPS-relevant follow-up items'},
-          ],
+          hidden: [],
           debrief: [
-            {zh:'🔴 最终团队复盘（没有Hank，当晚）：',en:'🔴 FINAL TEAM DEBRIEF (without Hank, that evening):'},
-            {zh:'60天R&D build plan是什么？',en:'What\'s the 60-day R&D build plan?'},
-            {zh:'基于所学的最小可行高端offer是什么？',en:'Minimum viable premium offer based on learnings?'},
-            {zh:'Larson将build什么系统架构？',en:'What system architecture will Larson build?'},
-            {zh:'需要创建什么培训内容？',en:'What training content needs creating?'},
-            {zh:'3-5间MY诊所的试点计划？',en:'Pilot plan for 3-5 MY clinics?'},
-          ]
+            { zh: '🔴 最终团队复盘（许医师不在，当晚）：', en: '🔴 FINAL TEAM DEBRIEF (without Hank, that evening):' },
+            { zh: '60天R&D build计划是什么？', en: 'What\'s the 60-day R&D build plan?' },
+            { zh: '从学到的东西中提炼出最小可行高端产品', en: 'Minimum viable premium offer from what we learned' },
+            { zh: 'Larson先建什么系统？', en: 'What system will Larson build first?' },
+            { zh: '要创建什么培训内容？', en: 'What training content must be created?' },
+            { zh: '3-5间MY诊所的试点计划？', en: 'Pilot plan for 3-5 MY clinics?' },
+          ],
+          assign: [
+            { who: 'Larson', cls: 'larson', zh: '主导。长期伙伴模式，不是短期提取者。', en: 'Lead. Long-term partner mode, not short-term extractor.' },
+            { who: 'ZiYi', cls: 'ziyi', zh: '记录做出的所有承诺', en: 'Note all commitments made' },
+            { who: 'Irvine', cls: 'irvine', zh: '记录CSM相关的承诺或支持', en: 'Note CSM-relevant commitments' },
+            { who: 'Peijia', cls: 'peijia', zh: '记录CPS相关的后续事项', en: 'Note CPS-relevant follow-up items' },
+          ],
         },
-      ]
+      ],
+      homework: [
+        { who: 'Larson', cls: 'larson', zh: '最终系统架构 + 60天冲刺计划v1', en: 'Final system architecture + 60-day sprint plan v1' },
+        { who: 'ZiYi', cls: 'ziyi', zh: '完整验证流程图（终版）+ 对许医师做出的所有承诺清单', en: 'Complete validated process map (final version) + list of all commitments made to Hank' },
+        { who: 'Irvine', cls: 'irvine', zh: '「给诊所老板的月报长什么样」——草稿版', en: '"What does monthly report to clinic owner look like" — draft version' },
+        { who: 'Peijia', cls: 'peijia', zh: '端到端CPS整合地图：我们系统接触病人旅程的每个节点', en: 'End-to-end CPS integration map: every point our system touches the patient journey' },
+      ],
     },
-  ],
+  },
   postTrip: [
-    {week:{zh:'第1周',en:'Week 1'}, action:{zh:'全员复盘 + 知识整理到结构化文档。Larson：系统架构v1。',en:'Full debrief + knowledge dump to structured docs. Larson: system architecture v1.'}},
-    {week:{zh:'第2-3周',en:'Week 2-3'}, action:{zh:'建MVP仪表盘（Supabase + 我们的栈）。创建培训模块大纲。',en:'Build MVP dashboard (Supabase + our stack). Create training module outlines.'}},
-    {week:{zh:'第4-5周',en:'Week 4-5'}, action:{zh:'用2-3间约定的MY诊所试点。测试诊断框架。收集数据。',en:'Pilot with 2-3 agreed MY clinics. Test diagnostic framework. Collect data.'}},
-    {week:{zh:'第6-8周',en:'Week 6-8'}, action:{zh:'基于试点数据迭代。设计高端offer。准备Phase 2提案给Hank。',en:'Iterate on pilot data. Design premium offer. Prepare Phase 2 proposal for Hank.'}},
+    { week: { zh: '第1周', en: 'Week 1' }, action: { zh: '完整复盘 + 结构化文档。Larson：系统架构v1。', en: 'Full debrief + structured documentation. Larson: system architecture v1.' } },
+    { week: { zh: '第2-3周', en: 'Week 2-3' }, action: { zh: '建最小可行仪表板（Supabase + 我们的栈）。创建培训模块大纲。', en: 'Build MVP dashboard (Supabase + our stack). Create training module outlines.' } },
+    { week: { zh: '第4-5周', en: 'Week 4-5' }, action: { zh: '2-3间马来诊所试点。测试诊断框架。收集数据。', en: 'Pilot with 2-3 agreed MY clinics. Test diagnostic framework. Collect data.' } },
+    { week: { zh: '第6-8周', en: 'Week 6-8' }, action: { zh: '根据试点数据迭代。设计高端产品。准备给许医师的第二阶段方案。', en: 'Iterate on pilot data. Design premium offer. Prepare Phase 2 proposal for Hank.' } },
   ],
-  doctrine: {
-    zh:'高端服务从深度运营理解中浮现，不是从纸上设计包装。行程给原材料。60天给产品。试点给信号。Phase 2给商业权利。',
-    en:'Premium emerges from deep operational understanding, not paper design. Trip = raw material. 60 days = product. Pilot = signal. Phase 2 = commercial rights.'
-  }
+  checklist: {
+    red: [
+      { zh: '能画出从进门到第一次买配套的完整流程图（含每步话术）', en: 'Can draw COMPLETE flow from door to first package (including scripts at each step)' },
+      { zh: '记录了治疗师→前台交接的准确话术（在患者面前说的）', en: 'Documented exact therapist→front desk handoff script (said IN FRONT of patient)' },
+      { zh: '搞清楚Hank系统里的佣金结构（PP1）', en: 'Extracted Hank\'s commission structure from system (PP1)' },
+      { zh: '了解套餐到期提醒机制（PP4）——提前多久、通知谁', en: 'Understood package expiry alert mechanism (PP4) — how early, who notified' },
+      { zh: '录下了Hank的第一次诊所评估流程（整趟旅程最重要的问题）', en: 'Recorded Hank\'s first clinic assessment process (most important question of trip)' },
+      { zh: '获得了许医师给出的品质关卡具体指标', en: 'Got Hank\'s specific quality gate metrics for pilot independence' },
+      { zh: '有仪表板录屏（含每个指标的计算逻辑）', en: 'Have dashboard screen recordings (including calculation logic for each metric)' },
+    ],
+    yellow: [
+      { zh: '有完整患者数据模型草图（可用于Supabase重建）', en: 'Have complete patient data model sketch (usable for Supabase rebuild)' },
+      { zh: '记录了续购率和最高续购率的流程（PP4）', en: 'Documented renewal rates and highest-renewal process (PP4)' },
+      { zh: '了解了佣金系统完整的计算方式', en: 'Understood full commission calculation methodology' },
+      { zh: '有「非医疗培训师能不能交付」的明确答案', en: 'Have clear answer: can non-medical trainer deliver mindset training?' },
+      { zh: '已对齐试点的3间MY诊所', en: 'Aligned on 3 MY pilot clinics' },
+    ],
+    green: [
+      { zh: '内容素材（15秒B-roll）已拍摄', en: 'Content B-roll (15-sec clips) captured' },
+      { zh: '所有承诺已书面记录', en: 'All commitments documented in writing' },
+      { zh: '有Hank对我们系统架构草图的反馈', en: 'Got Hank\'s feedback on our system architecture sketch' },
+      { zh: '了解了Hank看诊所数据的顺序（周一早上例行流程）', en: 'Understood Hank\'s Monday morning review sequence' },
+    ],
+  },
 };
+
+let openSections = {};
 
 function render() {
   const app = document.getElementById('app');
   let html = '';
 
-  // Header
   html += `<div class="tw-header">
     <div class="tw-header-row">
-      <div><h1>台湾 榨干 PROTOCOL</h1><p>3-Day Extraction Architecture v3.0</p></div>
+      <div><h1>🇹🇼 台湾学习之旅 v4.0</h1><p>${t('3天团队行程 | Larson, ZiYi, Irvine, Peijia | 许医师诊所，台湾', '3-Day Team Schedule | Larson, ZiYi, Irvine, Peijia | Hank Clinic, Taiwan')}</p></div>
       <button class="tw-lang-btn" onclick="toggleLang()">${lang==='zh'?'EN':'中文'}</button>
     </div>
   </div>`;
 
-  // Mission
-  html += `<div class="tw-mission"><p>${lang==='zh'?DATA.mission.zh:DATA.mission.en}</p></div>`;
+  html += `<div class="tw-mission"><p>${t(DATA.mission.zh, DATA.mission.en)}</p></div>`;
 
-  // Nav
   const views = [
-    {id:'overview',label:{zh:'总览',en:'OVERVIEW'}},
-    {id:'blindspots',label:{zh:'⚠️ 盲点',en:'⚠️ BLIND'}},
-    {id:'painpoints',label:{zh:'🎯 痛点',en:'🎯 PAIN'}},
-    {id:'day1',label:{zh:'DAY 1',en:'DAY 1'}},
-    {id:'day2',label:{zh:'DAY 2',en:'DAY 2'}},
-    {id:'day3',label:{zh:'DAY 3',en:'DAY 3'}},
-    {id:'post',label:{zh:'行程后',en:'POST'}},
+    { id: 'overview', zh: '总览', en: 'OVERVIEW' },
+    { id: 'missions', zh: '👤 任务', en: '👤 MISSIONS' },
+    { id: 'painpoints', zh: '🎯 痛点', en: '🎯 PAIN PTS' },
+    { id: 'day1', zh: 'DAY 1', en: 'DAY 1' },
+    { id: 'day2', zh: 'DAY 2', en: 'DAY 2' },
+    { id: 'day3', zh: 'DAY 3', en: 'DAY 3' },
+    { id: 'checklist', zh: '✅ 清单', en: '✅ CHECK' },
+    { id: 'post', zh: '行程后', en: 'POST' },
   ];
   html += '<div class="tw-nav">';
   views.forEach(v => {
-    html += `<button class="tw-nav-btn ${currentView===v.id?'active':'inactive'}" onclick="setView('${v.id}')">${lang==='zh'?v.label.zh:v.label.en}</button>`;
+    html += `<button class="tw-nav-btn ${currentView===v.id?'active':'inactive'}" onclick="setView('${v.id}')">${t(v.zh,v.en)}</button>`;
   });
   html += '</div>';
 
   html += '<div class="tw-section">';
 
   if (currentView === 'overview') {
-    html += `<div class="tw-stitle">${t('3个提取层','3 Extraction Layers')}</div>`;
-    DATA.layers.forEach(l => {
-      html += `<div class="tw-card"><div class="tw-card-title"><span class="tw-badge ${l.color}">${l.id}</span> ${t(l.zh,l.en)}</div><div class="tw-card-desc">${t(l.descZh,l.descEn)}</div></div>`;
-    });
-
-    html += `<div class="tw-stitle" style="margin-top:1rem">${t('团队 + 每日成果','Team + Daily Deliverables')}</div>`;
+    html += `<div class="tw-stitle">${t('团队 + 每日成果','Team + Daily Deliverables')}</div>`;
     DATA.team.forEach(m => {
-      html += `<div class="tw-card"><div class="tw-card-title"><span class="tw-team-label" style="background:${m.color}">${t(m.role.zh,m.role.en)}</span>${m.name}</div><div class="tw-card-desc">${t(m.focus.zh,m.focus.en)}</div><span class="tw-highlight">📋 ${t('每晚','Nightly')}：${t(m.daily.zh,m.daily.en)}</span></div>`;
+      html += `<div class="tw-card"><div class="tw-card-title"><span class="tw-badge ${m.key}">${t(m.role.zh, m.role.en)}</span>${m.name}</div><div class="tw-card-desc">${t(m.lens.zh, m.lens.en)}</div><span class="tw-highlight">📋 ${t('每晚','Nightly')}: ${t(m.daily.zh, m.daily.en)}</span></div>`;
     });
 
     html += `<div class="tw-stitle" style="margin-top:1rem">${t('基本规则','Ground Rules')}</div>`;
-    DATA.rules.forEach((r,i) => {
-      html += `<div class="tw-rule"><span class="tw-rule-num">#${i+1}</span> ${t(r.zh,r.en)}</div>`;
+    DATA.rules.forEach((r, i) => {
+      html += `<div class="tw-rule"><span class="tw-rule-num">#${i+1}</span> ${t(r.zh, r.en)}</div>`;
     });
   }
 
-  else if (currentView === 'blindspots') {
-    html += `<div class="tw-stitle red">${t('⚠️ 战略盲点','⚠️ STRATEGIC BLIND SPOTS')}</div>`;
-    DATA.blindspots.forEach(b => {
-      html += `<div class="tw-blindspot"><h3>#${b.id}: ${t(b.zh,b.en)}</h3><p>${t(b.descZh,b.descEn)}</p></div>`;
-    });
-  }
-
-  else if (currentView === 'painpoints') {
-    html += `<div class="tw-stitle blue">${t('🎯 ARIS痛点 → 提取目标','🎯 ARIS Pain Points → Extraction Targets')}</div>`;
-    DATA.painpoints.forEach(p => {
-      html += `<div class="tw-painpoint"><div class="tw-painpoint-header"><h3>${p.id}: ${t(p.zh,p.en)}</h3><span class="mapTo">→ ${p.map}</span></div><p>${t(p.descZh,p.descEn)}</p></div>`;
+  else if (currentView === 'missions') {
+    html += `<div class="tw-stitle">${t('个人任务简报','Individual Mission Briefs')}</div>`;
+    DATA.team.forEach(m => {
+      html += `<div class="tw-mission-card" style="border-left: 3px solid ${m.color}">`;
+      html += `<div class="tw-mission-header"><span class="tw-badge ${m.key}">${m.name}</span><div><div class="tw-mission-name">${t(m.role.zh, m.role.en)}</div><div class="tw-mission-role">${t('你的视角 / Your Lens','你的视角 / Your Lens')}</div></div></div>`;
+      html += `<div class="tw-card-desc" style="margin-bottom:0.5rem">${t(m.lens.zh, m.lens.en)}</div>`;
+      html += `<div style="font-size:0.688rem;font-weight:bold;color:#9CA3AF;margin-bottom:0.375rem;text-transform:uppercase">${t('你专属要问的问题','Your Specific Questions')}</div>`;
+      m.questions.forEach(q => {
+        html += `<div class="tw-item ask">${t(q.zh, q.en)}</div>`;
+      });
+      html += `<span class="tw-highlight">📋 ${t('每晚','Nightly')}: ${t(m.daily.zh, m.daily.en)}</span>`;
+      html += `</div>`;
     });
   }
 
   else if (currentView.startsWith('day')) {
-    const dayIdx = parseInt(currentView[3]) - 1;
-    const day = DATA.days[dayIdx];
+    const dayNum = parseInt(currentView[3]);
+    const day = DATA.days[dayNum];
     if (!day) { html += '<p>No data</p>'; }
     else {
-      html += `<div class="tw-day-header"><h2>DAY ${day.day}: ${t(day.theme.zh,day.theme.en)}</h2><p>${day.date} — ${t(day.subtitle.zh,day.subtitle.en)}</p></div>`;
+      html += `<div class="tw-day-header">
+        <h2>DAY ${dayNum}: ${t(day.theme.zh, day.theme.en)}</h2>
+        <p>${t(day.date.zh, day.date.en)}</p>
+        ${day.hankSchedule ? `<p style="color:#FBBF24;font-size:0.75rem;margin-top:0.25rem">⏰ ${t(day.hankSchedule.zh, day.hankSchedule.en)}</p>` : ''}
+        <p style="margin-top:0.375rem;border-top:1px solid #374151;padding-top:0.375rem">${t('目标 Goal','目标 Goal')}: ${t(day.goal.zh, day.goal.en)}</p>
+      </div>`;
 
       html += '<div class="tw-block-nav">';
-      day.blocks.forEach((b,i) => {
-        html += `<button class="${currentBlock===i?'active':'inactive'}" onclick="setBlock(${dayIdx},${i})">${b.time.split(' ')[0]}</button>`;
+      day.blocks.forEach((b, i) => {
+        html += `<button class="${currentBlock[dayNum]===i?'active':'inactive'}" onclick="setBlock(${dayNum},${i})">${b.time.split('–')[0].split(' ')[0]}</button>`;
       });
       html += '</div>';
 
-      const block = day.blocks[currentBlock] || day.blocks[0];
+      const block = day.blocks[currentBlock[dayNum]] || day.blocks[0];
       if (block) {
-        html += `<div class="tw-card" style="border-color:#FBBF24;border-width:1px"><div class="tw-card-title">${t(block.title.zh,block.title.en)} <span class="tw-time-badge">${block.time}</span></div>`;
-        if (block.hank) html += `<div style="font-size:0.75rem;color:#6B7280;font-style:italic;margin-top:0.25rem">Hank: ${t(block.hank.zh,block.hank.en)}</div>`;
-        html += '</div>';
+        html += `<div class="tw-block-card"><div class="tw-card-title">${t(block.title.zh, block.title.en)} <span class="tw-time-badge">${block.time}</span></div>`;
+        if (block.context) html += `<div class="tw-block-meta">${t(block.context.zh, block.context.en)}</div>`;
+        html += `</div>`;
 
-        if (block.sections) {
-          block.sections.forEach(s => {
-            const layerNames = {A:{zh:'运营蓝图',en:'Blueprint'},B:{zh:'诊断框架',en:'Diagnostic'},C:{zh:'系统架构',en:'System'}};
-            html += `<div class="tw-layer-header" onclick="toggleLayer('${s.layer}')"><div><span class="tw-badge ${s.layer.toLowerCase()}">${s.layer}</span> <span style="font-size:0.75rem;font-weight:bold;color:#F3F4F6">${t(layerNames[s.layer].zh,layerNames[s.layer].en)}</span> <span style="font-size:0.688rem;color:#6B7280">(${s.items.length})</span></div><span style="color:#6B7280;font-size:0.688rem">${layerState[s.layer]?'▼':'▶'}</span></div>`;
-            if (layerState[s.layer]) {
-              html += '<div class="tw-layer-body">';
-              s.items.forEach(item => {
-                const text = typeof item === 'string' ? item : t(item.zh, item.en);
-                const type = typeof item === 'string' ? 'normal' : (item.type || 'normal');
-                html += `<div class="tw-item ${type}">${text}</div>`;
-              });
-              html += '</div>';
-            }
-          });
-        }
+        const renderItem = (item) => {
+          const text = t(item.zh, item.en);
+          const type = item.type || 'normal';
+          let s = `<div class="tw-item ${type}">${text}`;
+          if (item.subs && item.subs.length > 0) {
+            s += '<div style="margin-top:0.25rem;margin-left:0.5rem">';
+            item.subs.forEach(sub => {
+              s += `<div style="padding:0.2rem 0.375rem;font-size:0.725rem;color:inherit;opacity:0.9;border-left:2px solid rgba(255,255,255,0.15);margin-bottom:0.2rem;line-height:1.4">• ${t(sub.zh, sub.en)}</div>`;
+            });
+            s += '</div>';
+          }
+          s += '</div>';
+          return s;
+        };
 
-        if (block.teamAssign && block.teamAssign.length > 0) {
-          html += `<div style="margin-top:0.5rem"><div class="tw-layer-header" style="cursor:default"><span style="font-size:0.75rem;font-weight:bold;color:#F3F4F6"><span class="tw-badge team">TEAM</span> ${t('任务分配','Assignments')}</span></div><div class="tw-layer-body">`;
-          block.teamAssign.forEach(ta => {
-            html += `<div class="tw-team-row"><span class="tw-team-name">${ta.who}: </span><span class="tw-team-task">${t(ta.zh,ta.en)}</span></div>`;
-          });
-          html += '</div></div>';
+        const makeSec = (items, label, key, color) => {
+          if (!items || items.length === 0) return '';
+          const id = `${dayNum}_${currentBlock[dayNum]}_${key}`;
+          const isOpen = openSections[id] !== false;
+          let s = `<div class="tw-section-header" onclick="toggleSec('${id}')"><span style="font-size:0.75rem;font-weight:bold;color:${color}">${label}</span><span style="color:#6B7280;font-size:0.688rem">${isOpen?'▼':'▶'}</span></div>`;
+          if (isOpen) {
+            s += '<div class="tw-section-body">';
+            items.forEach(item => { s += renderItem(item); });
+            s += '</div>';
+          }
+          return s;
+        };
+
+        html += makeSec(block.capture, t('📋 要抓住什么', '📋 What to Capture'), 'cap', '#93C5FD');
+        html += makeSec(block.ask, t('❓ 要问许医师的问题', '❓ Key Questions to Ask Hank'), 'ask', '#FCD34D');
+        html += makeSec(block.hidden, t('🔍 隐藏提取层', '🔍 Hidden Extraction Layer'), 'hid', '#C4B5FD');
+
+        if (block.assign && block.assign.length > 0) {
+          const id = `${dayNum}_${currentBlock[dayNum]}_assign`;
+          const isOpen = openSections[id] !== false;
+          html += `<div class="tw-section-header" onclick="toggleSec('${id}')"><span style="font-size:0.75rem;font-weight:bold;color:#F3F4F6">👥 ${t('任务分配','Team Assignments')}</span><span style="color:#6B7280;font-size:0.688rem">${isOpen?'▼':'▶'}</span></div>`;
+          if (isOpen) {
+            html += '<div class="tw-section-body">';
+            block.assign.forEach(a => {
+              html += `<div class="tw-team-row"><span class="tw-badge ${a.cls}" style="font-size:0.625rem">${a.who}</span> <span style="color:#D1D5DB;font-size:0.75rem">${t(a.zh, a.en)}</span></div>`;
+            });
+            html += '</div>';
+          }
         }
 
         if (block.debrief && block.debrief.length > 0) {
           html += '<div class="tw-debrief"><div class="tw-debrief-title">DEBRIEF</div>';
           block.debrief.forEach(d => {
-            html += `<div class="tw-debrief-item">→ ${typeof d === 'string' ? d : t(d.zh, d.en)}</div>`;
+            html += `<div class="tw-debrief-item">→ ${t(d.zh, d.en)}</div>`;
           });
           html += '</div>';
         }
       }
+
+      if (day.homework && day.homework.length > 0) {
+        html += `<div class="tw-stitle" style="margin-top:1rem">📋 ${t('晚间作业（睡前发到群里）','Nightly Homework (Send to group before sleep)')}</div>`;
+        day.homework.forEach(h => {
+          html += `<div class="tw-hw-row ${h.cls}"><div class="tw-hw-name"><span class="tw-badge ${h.cls}" style="font-size:0.625rem">${h.who}</span></div><div class="tw-hw-task">${t(h.zh, h.en)}</div></div>`;
+        });
+      }
     }
   }
 
-  else if (currentView === 'post') {
-    html += `<div class="tw-stitle">${t('行程后：60天R&D冲刺','POST-TRIP: 60-DAY R&D SPRINT')}</div>`;
-    DATA.postTrip.forEach(p => {
-      html += `<div class="tw-post-item"><div class="tw-post-week">${t(p.week.zh,p.week.en)}</div><div class="tw-post-action">${t(p.action.zh,p.action.en)}</div></div>`;
+  else if (currentView === 'checklist') {
+    const secs = [
+      { key: 'red', label: { zh: '🔴 必须完成（否则旅程失败）', en: '🔴 MUST HAVE (trip fails without these)' } },
+      { key: 'yellow', label: { zh: '🟡 重要但不致命', en: '🟡 IMPORTANT but not fatal' } },
+      { key: 'green', label: { zh: '🟢 加分项', en: '🟢 BONUS items' } },
+    ];
+    secs.forEach(sec => {
+      html += `<div class="tw-stitle" style="margin-top:${sec.key==='red'?'0':'1rem'}">${t(sec.label.zh, sec.label.en)}</div>`;
+      DATA.checklist[sec.key].forEach(item => {
+        html += `<div class="tw-checklist-item ${sec.key}"><div class="tw-checklist-dot ${sec.key}"></div><div class="tw-checklist-text">${t(item.zh, item.en)}</div></div>`;
+      });
     });
-    html += `<div class="tw-card" style="border-color:rgba(251,191,36,0.3);margin-top:1rem"><div style="font-size:0.75rem;font-weight:bold;color:#FBBF24;margin-bottom:0.375rem">${t('信条','DOCTRINE')}</div><div style="font-size:0.75rem;color:#9CA3AF">${t(DATA.doctrine.zh,DATA.doctrine.en)}</div></div>`;
+    html += `<div class="tw-card" style="border-color:rgba(251,191,36,0.3);margin-top:1rem"><div style="font-size:0.688rem;font-weight:bold;color:#FBBF24;margin-bottom:0.375rem">${t('每晚检查','Nightly Check-In')}</div><div style="font-size:0.75rem;color:#9CA3AF">${t('每晚睡前，每人对照清单回答：今天拿到了哪些红色项目？还缺什么？明天要补？','Every night before sleep, each person checks: which RED items did we get today? What\'s still missing? What must we get tomorrow?')}</div></div>`;
+  }
+
+  else if (currentView === 'painpoints') {
+    html += `<div class="tw-stitle">${t('🎯 ARIS痛点提取地图 — 每个PP在哪里解决','🎯 Pain Point Extraction Map — Where Each PP Gets Addressed')}</div>`;
+    DATA.painpoints.forEach(p => {
+      html += `<div class="tw-card" style="border-left:3px solid #3B82F6;margin-bottom:0.75rem">
+        <div class="tw-card-title" style="display:flex;justify-content:space-between;align-items:center">
+          <span><span class="tw-badge" style="background:#3B82F6">${p.id}</span> ${t(p.zh, p.en)}</span>
+          <span style="font-size:0.688rem;color:#60A5FA;white-space:nowrap;margin-left:0.5rem">${t(p.mapZh, p.mapEn)}</span>
+        </div>
+        <div class="tw-card-desc">${t(p.descZh, p.descEn)}</div>
+      </div>`;
+    });
+  }
+
+  else if (currentView === 'post') {
+    html += `<div class="tw-stitle">${t('行程后：60天研发冲刺','Post-Trip: 60-Day R&D Sprint')}</div>`;
+    DATA.postTrip.forEach(p => {
+      html += `<div class="tw-post-item"><div class="tw-post-week">${t(p.week.zh, p.week.en)}</div><div class="tw-post-action">${t(p.action.zh, p.action.en)}</div></div>`;
+    });
   }
 
   html += '</div>';
-
-  // Footer
-  html += `<div class="tw-footer"><p>水 absorbs everything. 木 converts to action. 火 becomes wealth. 榨干每一刻。</p></div>`;
+  html += `<div class="tw-footer"><p>🇹🇼 台湾学习之旅 v4.0 | 3/4–3/6 | Larson · ZiYi · Irvine · Peijia</p></div>`;
 
   app.innerHTML = html;
 }
 
 function toggleLang() { lang = lang==='zh'?'en':'zh'; render(); }
-function setView(v) {
-  currentView = v;
-  if (v.startsWith('day')) { currentDay = parseInt(v[3])-1; currentBlock = 0; }
-  render();
-}
-function setBlock(dayIdx, blockIdx) { currentDay = dayIdx; currentBlock = blockIdx; render(); }
-function toggleLayer(l) { layerState[l] = !layerState[l]; render(); }
+function setView(v) { currentView = v; render(); }
+function setBlock(dayNum, idx) { currentBlock[dayNum] = idx; render(); }
+function toggleSec(id) { openSections[id] = openSections[id]===false ? true : false; render(); }
 
 render();
 </script>
-</div>
 </body>
 </html>
